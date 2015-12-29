@@ -3,6 +3,6 @@ class SubscribeUserToMailingListJob
 
   def perform(user)
     gibbon = Gibbon::Request.new
-    gibbon.lists("7c95b280f7").members.create( body: {email_address: "foo@bar.com", status: "subscribed", merge_fields: {FNAME: "First Name", LNAME: "Last Name"}})
+    gibbon.lists("7c95b280f7").members.create( body: {email_address: user.email, status: "subscribed", FNAME: user.name})
   end
 end
