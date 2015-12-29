@@ -1,5 +1,5 @@
-class SubscribeUserToMailingListJob < ActiveJob::Base
-  queue_as :default
+class SubscribeUserToMailingListJob
+  include SuckerPunch::Job
 
   def perform(user)
     gibbon = Gibbon::Request.new

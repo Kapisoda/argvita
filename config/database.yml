@@ -9,11 +9,16 @@ default: &default
   encoding: utf8
   pool: 5
   timeout: 5000
+  host: sql4.freemysqlhosting.net
+  database: sql4101370
+  username: sql4101370
+  password: ZbzqZSk8b2
+  port: 3306
 
 development:
   <<: *default
   adapter: mysql2
-  database: argvita_development
+  #database: argvita_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,7 +26,7 @@ development:
 test:
   <<: *default
   adapter: mysql2
-  database: argvita_development
+  #database: argvita_development
 
 production:
   <<: *default
