@@ -1,4 +1,4 @@
-class SendWelcomeMail
+class SendWelcomeMail < ApplicationMailer
   include SuckerPunch::Job
 
   def welcome_email(user)
