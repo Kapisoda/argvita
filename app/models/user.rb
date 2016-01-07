@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  after_create :subscribe_user_to_mailing_list, :send_welcome_email_to_user
+  after_create :subscribe_user_to_mailing_list
+  after_create :send_welcome_email_to_user
 
   private
 
