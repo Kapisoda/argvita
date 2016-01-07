@@ -10,9 +10,9 @@ default: &default
   pool: 5
   timeout: 5000
   host: sql4.freemysqlhosting.net
-  database: sql4101370
-  username: sql4101370
-  password: ZbzqZSk8b2
+  database: sql4100881
+  username: sql4100881
+  password: WVg7qKu7w7
   port: 3306
 
 development:
