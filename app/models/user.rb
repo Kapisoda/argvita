@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email_to_user
-    UserMailer.welcome_email(self).deliver_later
+    UserMailer.welcome_email(self).deliver_now
   end
 
 end
