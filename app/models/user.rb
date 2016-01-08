@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email_to_user
-    SendWelcomeMail.new.async.welcome_email(self)
+    UserMailer.welcome_email(self).deliver_later
   end
 
 end
