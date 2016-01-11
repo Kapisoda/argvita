@@ -40,11 +40,23 @@ gem 'gibbon'
 gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 
+#jesen
+gem 'filterrific'
+
+gem 'gon'
+
+gem 'hermitage'
+
+gem 'simple_form'
+
+
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'better_errors'
   gem 'dotenv-rails', :groups => [:development]
-
+  gem 'kaminari'
 end
 
 group :development do

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'articles/show'
 
+
   get 'categories/index'
 
   get 'categories/show'
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :categories
+
+
   devise_for :users, controllers: { registrations: "users/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

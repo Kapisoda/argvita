@@ -8,7 +8,7 @@ Rails.application.configure do
       :user_name => 'filipkapusta1@gmail.com',
       :password  => 'ShBeRdRK9HnK0ztxJbWUKQ',
       :authentication => :plain,
-      :domain => 'heroku.com'
+      :domain => 'gmail.com'
   }
 
   ActionMailer::Base.delivery_method = :smtp
