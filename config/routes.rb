@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+
+
+  get 'clients/show'
+
   get 'articles/index'
 
   get 'articles/show'
-
 
   get 'categories/index'
 
@@ -10,9 +13,10 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+
   resources :articles
   resources :categories
-
+  resources :clients
 
   devise_for :users, controllers: { registrations: "users/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
