@@ -14,4 +14,5 @@ class Category < ActiveRecord::Base
     order('LOWER(title)').map { |e| [e.title, e.id] }
   end
 
+
 end

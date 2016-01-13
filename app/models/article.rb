@@ -26,7 +26,9 @@ class Article < ActiveRecord::Base
           :with_cost_gte,
           :with_created_at_gte,
           :min_cost,
-          :max_cost
+          :max_cost,
+          :with_subcategory_id,
+          :with_ssubcategory_id
       ]
   )
 
@@ -55,9 +57,20 @@ class Article < ActiveRecord::Base
     end
   }
 
+# scopovi za podkategorije i podpodkategorije
+  scope :with_subcategory_id, lambda { |subcategory_ids|
+    where(category_id: [*subcategory_ids])
+  }
+
+  scope :with_ssubcategory_id, lambda { |ssubcategory_ids|
+    where(category_id: [*ssubcategory_ids])
+  }
+
+##################################################################
 
 
 
+ #scopovi za cijene
   scope :with_cost_gte, lambda { |ref_int|
     where(cost: [*ref_int])
   }
@@ -73,7 +86,7 @@ class Article < ActiveRecord::Base
     where("articles.cost > ?", [*ref_int])
   }
 
-
+######################################################
 
 
 
