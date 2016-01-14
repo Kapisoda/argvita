@@ -15,6 +15,27 @@ class Article < ActiveRecord::Base
 
   has_many :pictures, :dependent => :destroy
 
+
+
+  def provjera
+    @article= Article.all
+    @article.each do |article|
+      if article.start_date != nil
+        if DateTime.now >= article.start_date && DateTime.now < article.end_date
+          article.on_discount = true
+          article.save
+        elsif DateTime.now > article.end_date
+          article.on_discount = false
+          article.save
+        end
+      end
+    end
+  end
+
+
+
+
+
   #filterrific
   filterrific(
       default_filter_params: { sorted_by: 'created_at_desc' },

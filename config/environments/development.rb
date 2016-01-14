@@ -16,6 +16,9 @@ Rails.application.configure do
         :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AqPpIBzMUFoBuv3r6.yzNojMjYL0")
 
   end
+
+
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

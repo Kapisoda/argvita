@@ -49,7 +49,7 @@ gem 'hermitage'
 
 gem 'simple_form'
 
-
+gem 'whenever', :require => false
 
 
 group :development, :test do
