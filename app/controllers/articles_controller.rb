@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+
+
+
   def index
 
 
@@ -49,5 +52,21 @@ class ArticlesController < ApplicationController
   def show_pics
 
   end
+
+  def show
+    @article = Article.find(params[:id])
+   # @article = Article.all
+    #@article.increment!(:counter)
+  end
+
+  private
+  def article_params
+    params.require(:article).permit(:id, :title, :categories_id, :materials_id, :cost, :subcategories_id, :ssubcategories_id )
+  end
+
+
+
+
+
 
 end

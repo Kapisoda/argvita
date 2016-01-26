@@ -8,16 +8,28 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
 
+# paypal ################################################################################
+  config.gem "activemerchant", :lib => "active_merchant", :version => "1.56.0"
+
+
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
     ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+
         :login => "filipkapusta1-facilitator_api1.gmail.com",
         :password => "GQGBKWDAHHGMTMMW",
-        :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AqPpIBzMUFoBuv3r6.yzNojMjYL0")
+        :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AqPpIBzMUFoBuv3r6.yzNojMjYL0"
+
+    )
 
   end
+  #test
 
 
+
+
+
+########################################################################################
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

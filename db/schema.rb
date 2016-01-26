@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112124358) do
+ActiveRecord::Schema.define(version: 20160118170752) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "article_complements", force: :cascade do |t|
+    t.integer  "complement_id",     limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "single_article_id", limit: 4
+  end
+
   create_table "articles", force: :cascade do |t|
     t.boolean  "raw",                                                    default: false
     t.string   "title",           limit: 255
@@ -62,6 +69,8 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.datetime "created_at",                                                             null: false
     t.datetime "updated_at",                                                             null: false
     t.boolean  "feature_product"
+    t.boolean  "on_discount"
+    t.integer  "counter",         limit: 4,                              default: 0
   end
 
   create_table "auctions", force: :cascade do |t|
@@ -73,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.integer  "complement_id",  limit: 4
   end
 
   create_table "carts_articles", force: :cascade do |t|
@@ -121,6 +131,22 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "complements", force: :cascade do |t|
+    t.string   "title",           limit: 255
+    t.string   "title_eng",       limit: 255
+    t.text     "description",     limit: 65535
+    t.text     "description_eng", limit: 65535
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "discount",        limit: 4
+    t.boolean  "on_discount"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "for_sale"
+    t.decimal  "cost",                          precision: 10
+    t.integer  "picture_id",      limit: 4
+  end
+
   create_table "coupons", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.integer  "discount",   limit: 4
@@ -129,6 +155,31 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "impressions", force: :cascade do |t|
+    t.string   "impressionable_type", limit: 255
+    t.integer  "impressionable_id",   limit: 4
+    t.integer  "user_id",             limit: 4
+    t.string   "controller_name",     limit: 255
+    t.string   "action_name",         limit: 255
+    t.string   "view_name",           limit: 255
+    t.string   "request_hash",        limit: 255
+    t.string   "ip_address",          limit: 255
+    t.string   "session_hash",        limit: 255
+    t.text     "message",             limit: 65535
+    t.text     "referrer",            limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "materials", force: :cascade do |t|
     t.string   "title",               limit: 255
@@ -139,6 +190,15 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "shopping_cart_id", limit: 4
+    t.string   "ip_address",       limit: 255
+    t.string   "card_type",        limit: 255
+    t.date     "card_expires_on"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "past_purchases", force: :cascade do |t|
@@ -157,6 +217,7 @@ ActiveRecord::Schema.define(version: 20160112124358) do
     t.datetime "image_updated_at"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "complement_id",      limit: 4
   end
 
   create_table "shopping_carts", force: :cascade do |t|

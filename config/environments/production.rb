@@ -1,6 +1,19 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #paypal ######################################################################
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :production
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+        :login => "seller_1229899173_biz_api1.railscasts.com",
+        :password => "FXWU58S7KXFC6HBE",
+        :signature => "AGjv6SW.mTiKxtkm6L9DcSUCUgePAUDQ3L-kTdszkPG8mRfjaRZDYtSu"
+    )
+  end
+
+  ################################################################################
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

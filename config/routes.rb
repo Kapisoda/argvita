@@ -1,11 +1,59 @@
 Rails.application.routes.draw do
 
 
+  get 'carts_articles/index'
+
+  get 'carts_articles/show'
+
+  get 'carts_articles/new'
+
+  get 'carts_articles/create'
+
+  get 'carts_articles/edit'
+
+  get 'carts_articles/update'
+
+  get 'carts_articles/destroy'
+
+  get 'shopping_carts/index'
+
+  get 'shopping_carts/show'
+
+  get 'shopping_carts/new'
+
+  get 'shopping_carts/create'
+
+  get 'shopping_carts/edit'
+
+  get 'shopping_carts/update'
+
+  get 'shopping_carts/destroy'
+
+  get 'orders/index'
+
+  get 'orders/show'
+
+  get 'orders/new'
+
+  get 'orders/create'
+
+  get 'orders/edit'
+
+  get 'orders/update'
+
+  get 'orders/destroy'
+
+  get 'shopping_carts/index'
+
+  get 'shopping_carts/show'
+
   get 'clients/show'
 
   get 'articles/index'
 
   get 'articles/index_subcategories'
+
+  get 'articles/show'
 
   get 'categories/index'
 
@@ -20,6 +68,8 @@ Rails.application.routes.draw do
   resources :clients
   resources :subcategories
   resources :ssubcategories
+  resources :shopping_carts
+  resources :carts_articles
 
   devise_for :users, controllers: { registrations: "users/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.

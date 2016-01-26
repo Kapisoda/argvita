@@ -1,4 +1,8 @@
 class Article < ActiveRecord::Base
+
+  has_many :carts_articles
+  has_many :shopping_carts, :through => :carts_articles
+
   has_many :article_categories
   has_many :categories, :through => :article_categories
 
@@ -20,7 +24,7 @@ class Article < ActiveRecord::Base
   def provjera
     @article= Article.all
     @article.each do |article|
-      if article.start_date != nil
+      if article.start_date != nil && article.end_date != nil
         if DateTime.now >= article.start_date && DateTime.now < article.end_date
           article.on_discount = true
           article.save

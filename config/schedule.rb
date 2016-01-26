@@ -14,7 +14,9 @@
 # end
 #
 #job_type :jobs, "'#{path}/app/jobs :perform'"
-set :environment, 'production'
+
+
+set :environment, 'development'
 
  every 5.minutes do
    runner "article.provjera"
