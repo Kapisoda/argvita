@@ -20,47 +20,42 @@ class CartsArticlesController < ApplicationController
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
 
     if @carts_article == nil
-      CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
+      CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format], amount: 1 )
       @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
-      @carts_article.increment!(:amount)
     else
       @carts_article.increment!(:amount)
     end
 
 
-
-    redirect_to articles_index_path
-
-
-
-
-    # @article= Article.find_by(params[:format])
-   # if @user.shopping_cart.carts_article == nil
-   # @carts_article = CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
-   # redirect_to articles_index_path
-   # if @carts_article.article.id == params[:format]
-   #   @carts_article.amount += 1
-   # else
-
-
-    #@shopping_cart.current_cost = CartsArticle.article.count(:cost)
-
-
-    #TODO sumu ukupnih proizvoda i da se carts article ne izraduje pri svakom odabiru artikla
-  end
+    @article = Article.find(params[:format])
+    @carts_articles = CartsArticle.all
 
 
 
-  def edit
-  end
+    if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
+      @shopping_cart.current_cost += @article.cost
+      @shopping_cart.save
+    else
+      @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
+      @shopping_cart.save
+    end
 
-  def update
-  end
+          redirect_to articles_index_path
 
-  def destroy
-  end
-  private
-  def cartsArticles_params
-    params.require(:cartsArticles).permit(:id, :shopping_cart_id, :single_articles_id, :amount)
-  end
+        end
+
+
+        def edit
+        end
+
+        def update
+        end
+
+        def destroy
+        end
+
+        private
+        def cartsArticles_params
+          params.require(:cartsArticles).permit(:id, :shopping_cart_id, :single_articles_id, :amount)
+        end
 end

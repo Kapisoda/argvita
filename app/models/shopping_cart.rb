@@ -7,4 +7,6 @@ class ShoppingCart < ActiveRecord::Base
   has_many :carts_articles
   has_many :articles, :through => :carts_articles
 
+
+
 end
