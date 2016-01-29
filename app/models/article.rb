@@ -10,6 +10,8 @@ class Article < ActiveRecord::Base
   belongs_to :subcategory
   belongs_to :ssubcategory
 
+
+
   belongs_to :picture
 
   has_many :coupons
