@@ -1,0 +1,24 @@
+<h1>ShoppingCarts#show
+wooohoooo</h1>
+<p>Find me in app/views/shopping_carts/show.html.erb</p>
+Ukupna cijena izabranih proizvoda je:
+
+
+
+<%= @shopping_cart.current_cost %>
+</br>
+
+<% @shopping_cart.carts_articles.each do |i| %>
+
+    <% @shopping_cart.articles.each do |a| %>
+          <% if i.article.id == a.id %>
+        <%=  a.title  %><%=  a.cost  %> x<%=  i.amount %>  <%= link_to 'remove from cart', shopping_carts_destroy_path(a.id ) %>  </br>
+            <% end %>
+    <% end %>
+
+
+<% end %>
+
+
+
+<%= link_to 'kupi' %>

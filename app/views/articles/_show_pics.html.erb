@@ -12,7 +12,7 @@
 
         <div class="col-xs-6 col-md-2 js--msr-gall">
           <div class="container-fluid gallery" >
-            <a href="#"  id="increment" ><%= link_to art.title, onclick: art.increment!(:counter) %> <%= art.cost %>  <%= link_to 'add to cart', carts_articles_create_path(art.id ) %> </a>
+            <a href="#"  id="increment" ><%= link_to art.title %> <%= art.cost %>  <%= link_to 'add to cart', carts_articles_create_path(art.id ) %> </a>
 
         </div>
         </div>

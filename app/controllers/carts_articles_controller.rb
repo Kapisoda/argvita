@@ -15,6 +15,12 @@ class CartsArticlesController < ApplicationController
 
   def create
 
+    if current_user == nil
+
+    @no_user_articles.push(params[:format])
+    else
+
+
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
@@ -25,24 +31,33 @@ class CartsArticlesController < ApplicationController
     else
       @carts_article.increment!(:amount)
     end
-
+  end
 
     @article = Article.find(params[:format])
-    @carts_articles = CartsArticle.all
+    #@carts_articles = CartsArticle.all
 
 
 
     if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
-      @shopping_cart.current_cost += @article.cost
-      @shopping_cart.save
+      if current_user == nil
+        @items_cost += @article.cost
+        @items_cost.save
+      else
+        @shopping_cart.current_cost += @article.cost
+        @shopping_cart.save
+      end
     else
-      @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
-      @shopping_cart.save
+      if current_user == nil
+        @items_cost += (@article.cost- (@article.cost*@article.discount/100))
+        @items_cost.save
+      end
+        @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
+        @shopping_cart.save
     end
 
-          redirect_to articles_index_path
+    redirect_to articles_index_path
 
-        end
+  end
 
 
         def edit

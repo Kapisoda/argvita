@@ -10,7 +10,8 @@ class Article < ActiveRecord::Base
   belongs_to :subcategory
   belongs_to :ssubcategory
 
-
+  has_many :past_purchases
+  has_many :users, :through => :past_purchases
 
   belongs_to :picture
 
