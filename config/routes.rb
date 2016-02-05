@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
 
 
+  get 'past_purchases/index'
+
+  get 'past_purchases/show'
+
+  get 'past_purchases/create'
+
+  get 'past_purchases/edit'
+
+  get 'past_purchases/update'
+
+  get 'past_purchases/destroy'
+
   get 'carts_articles/index'
 
   get 'carts_articles/show'

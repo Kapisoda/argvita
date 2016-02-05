@@ -1,5 +1,5 @@
 class CartsArticlesController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
 
   def index
@@ -17,7 +17,33 @@ class CartsArticlesController < ApplicationController
 
     if current_user == nil
 
-    @no_user_articles.push(params[:format])
+      @article = Article.find_by(params[:format])
+
+
+
+
+      #TODO HASH JOS NE RADI
+
+
+      $no_user_articles.each_pair do |k, v|
+        $no_user_articles_int.store(k.to_i, v.to_i)
+      end
+
+      #Hash[*$no_user_articles.to_a.flatten.map(&:to_i)]
+      if $no_user_articles_int.has_key?(@article.id)
+        $no_user_articles_int.keys.each do |k|
+          if $no_user_articles_int[k] == @article.id
+            $no_user_articles_int[k] +=1
+            $items_cost +=@article.cost
+          end
+        end
+      else
+        $no_user_articles[params[:format]] = 1
+        $items_cost +=@article.cost
+      end
+
+
+
     else
 
 
@@ -40,16 +66,18 @@ class CartsArticlesController < ApplicationController
 
     if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
       if current_user == nil
-        @items_cost += @article.cost
-        @items_cost.save
+
+        $items_cost += @article.cost
+
       else
         @shopping_cart.current_cost += @article.cost
         @shopping_cart.save
       end
     else
       if current_user == nil
-        @items_cost += (@article.cost- (@article.cost*@article.discount/100))
-        @items_cost.save
+
+        $items_cost += (@article.cost- (@article.cost*@article.discount/100))
+
       end
         @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
         @shopping_cart.save

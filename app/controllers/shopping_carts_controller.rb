@@ -1,5 +1,5 @@
 class ShoppingCartsController < ApplicationController
-  before_action :authenticate_user!
+ # before_action :authenticate_user!
   def index
 
 
@@ -7,11 +7,15 @@ class ShoppingCartsController < ApplicationController
 
   def show
     if current_user == nil
-      @art= Article.where(id: @no_user_articles)
+      #$no_user_articles.each do |k, v|
+        @articles = Article.where(id: $no_user_articles.keys)
+
+
+
     else
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
     end
-    #@carts_articles = CartsArticle.where(shopping_cart_id: @shopping_cart.id )
+
 
 
 
@@ -30,17 +34,25 @@ class ShoppingCartsController < ApplicationController
   end
 
   def update
+
   end
 
   def destroy
-
+    @article = Article.find(params[:format])
     if current_user == nil
 
-      @no_user_articles.delete(params[:format])
+      if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
+        $items_cost -= @article.cost
+
+      else
+        $items_cost -= (@article.cost- (@article.cost*@article.discount/100))
+
+      end
+      $no_user_articles.delete(params[:format])
 
 
     else
-      @article = Article.find(params[:format])
+
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
     if @carts_article.amount > 1

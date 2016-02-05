@@ -4,9 +4,10 @@ wooohoooo</h1>
 Ukupna cijena izabranih proizvoda je:
 
 
-
+<% if current_user != nil %>
 <%= @shopping_cart.current_cost %>
 </br>
+
 
 <% @shopping_cart.carts_articles.each do |i| %>
 
@@ -17,8 +18,25 @@ Ukupna cijena izabranih proizvoda je:
     <% end %>
 
 
+
+<% end %>
+    <% end %>
+
+<% if current_user == nil %>
+    <%= $items_cost %></br>
+<% @articles.each do |a| %>
+        <%  $no_user_articles.each do |k, v| %>
+            <% if a.id == k %>
+                <%=  a.title  %><%=  a.cost  %> <%=  "#{v}"  %>
+            <% end %>
+        <% end %>
+<% end %>
+<% end %>
+<%  $no_user_articles_int.each do |k, v| %>
+ <%= "#{k} je key a value je #{v}" %></br>
 <% end %>
 
 
 
-<%= link_to 'kupi' %>
+
+<%= link_to 'kupi', past_purchases_create_path %>
