@@ -39,17 +39,39 @@ class ShoppingCartsController < ApplicationController
 
   def destroy
     @article = Article.find(params[:format])
+
     if current_user == nil
 
-      if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
-        $items_cost -= @article.cost
+      if $no_user_articles.has_key?(@article.id.to_s)
 
-      else
-        $items_cost -= (@article.cost- (@article.cost*@article.discount/100))
+        $no_user_articles.each do |k, v|
 
+          if k == @article.id.to_s && v.to_i > 1
+            puts "ulazi u if"
+            $no_user_articles[k] -= 1
+            if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
+              $items_cost -= @article.cost
+
+            else
+              $items_cost -= (@article.cost- (@article.cost*@article.discount/100))
+
+            end
+          end
+
+          if k == @article.id.to_s && v.to_i == 1
+            puts "ulazi u else"
+            if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
+              $items_cost -= @article.cost
+
+            else
+              $items_cost -= (@article.cost- (@article.cost*@article.discount/100))
+
+            end
+            $no_user_articles.delete(k)
+          end
+
+        end
       end
-      $no_user_articles.delete(params[:format])
-
 
     else
 
@@ -75,7 +97,7 @@ class ShoppingCartsController < ApplicationController
       end
       @carts_article.destroy!
     end
-    end
+  end
 
     redirect_to shopping_carts_show_path
   end

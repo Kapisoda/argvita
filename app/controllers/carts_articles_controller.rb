@@ -17,27 +17,19 @@ class CartsArticlesController < ApplicationController
 
     if current_user == nil
 
-      @article = Article.find_by(params[:format])
+      @article = Article.find(params[:format])
 
 
-
-
-      #TODO HASH JOS NE RADI
-
-
-      $no_user_articles.each_pair do |k, v|
-        $no_user_articles_int.store(k.to_i, v.to_i)
-      end
-
-      #Hash[*$no_user_articles.to_a.flatten.map(&:to_i)]
-      if $no_user_articles_int.has_key?(@article.id)
-        $no_user_articles_int.keys.each do |k|
-          if $no_user_articles_int[k] == @article.id
-            $no_user_articles_int[k] +=1
+      puts "Ispred if za provjeru jel se artikl nalazi u hash-u"
+      if $no_user_articles.has_key?(@article.id.to_s)
+        $no_user_articles.each do |k, v|
+          if k == @article.id.to_s
+            $no_user_articles[k] += 1
             $items_cost +=@article.cost
           end
         end
       else
+        puts "Unutar if-else-a kada nije pronaden artikl unutar hash-a"
         $no_user_articles[params[:format]] = 1
         $items_cost +=@article.cost
       end

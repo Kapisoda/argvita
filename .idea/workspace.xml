@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3570e1cb-66e1-4168-a4bf-5011b685a224" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/past_purchases.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/past_purchases.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/past_purchases_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/helpers/past_purchases_helper.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/create.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/destroy.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/edit.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/index.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/show.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/past_purchases/update.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/controllers/past_purchases_controller_test.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/carts_articles_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/carts_articles_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shopping_carts/show.html.erb" afterPath="$PROJECT_DIR$/app/views/shopping_carts/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="argvita.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +19,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/argvita@Development__argvita.coverage" NAME="Development: argvita Coverage Results" MODIFIED="1454456524355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="argvita" />
+    <SUITE FILE_PATH="coverage/argvita@Development__argvita.coverage" NAME="Development: argvita Coverage Results" MODIFIED="1454676355740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="argvita" />
     <SUITE FILE_PATH="coverage/argvita@routes__argvita.coverage" NAME="routes: argvita Coverage Results" MODIFIED="1454428541536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="argvita" />
     <SUITE FILE_PATH="coverage/argvita@db_migrate__argvita.coverage" NAME="db:migrate: argvita Coverage Results" MODIFIED="1453137013654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="argvita" />
     <SUITE FILE_PATH="coverage/argvita@sidekiq.coverage" NAME="sidekiq Coverage Results" MODIFIED="1451426372792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="argvita" />
@@ -46,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shopping_carts_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shopping_carts_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.103679">
+              <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -59,8 +46,8 @@
       <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shopping_carts/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            <state vertical-scroll-proportion="-8.423077">
+              <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -76,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="carts_articles_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="carts_articles_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/carts_articles_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21510673">
-              <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -90,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -154,16 +141,16 @@
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/models/carts_article.rb" />
         <option value="$PROJECT_DIR$/app/models/shopping_cart.rb" />
-        <option value="$PROJECT_DIR$/app/views/articles/_show_pics.html.erb" />
         <option value="$PROJECT_DIR$/app/views/articles/index.html.erb" />
         <option value="$PROJECT_DIR$/app/models/article.rb" />
         <option value="$PROJECT_DIR$/app/models/past_purchase.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/controllers/past_purchases_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/shopping_carts/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/articles/_show_pics.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/shopping_carts/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/carts_articles_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb" />
       </list>
     </option>
   </component>
@@ -803,7 +790,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454352616403</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Napravljen pregled proslih kupnja">
+      <created>1454672247513</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1454672247513</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -812,16 +805,16 @@
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2632375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32496077" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33124018" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4866562" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861805" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32496077" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -871,20 +864,14 @@
     <MESSAGE value="napravljen amount za shopping cart" />
     <MESSAGE value="napravljen current cost  za shopping cart" />
     <MESSAGE value="napravljen prikaz za shopping cart, mogucnost micanja artikala iz shopping carta, ukupna cijena" />
-    <option name="LAST_COMMIT_MESSAGE" value="napravljen prikaz za shopping cart, mogucnost micanja artikala iz shopping carta, ukupna cijena" />
+    <MESSAGE value="Napravljen pregled proslih kupnja" />
+    <option name="LAST_COMMIT_MESSAGE" value="Napravljen pregled proslih kupnja" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/RailsInstaller/Ruby2.1.0/lib/ruby/gems/2.1.0/gems/activemerchant-1.56.0/lib/active_merchant.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/RailsInstaller/Ruby2.1.0/lib/ruby/gems/2.1.0/gems/activemerchant-1.56.0/lib/activemerchant.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1155,20 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/articles/_show_pics.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37317073">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/articles/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6781411">
-          <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/past_purchase.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11929824">
@@ -1207,23 +1180,31 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/articles/_show_pics.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.50268817">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shopping_carts/show.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/articles/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4569893">
+          <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/articles/index.js.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1238,8 +1219,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/carts_articles_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21510673">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shopping_carts/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.423077">
+          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.103679">
+          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
           <folding />
         </state>
       </provider>
