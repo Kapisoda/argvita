@@ -10,6 +10,13 @@ class PastPurchasesController < ApplicationController
 
      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
+     @user = User.find_by(id: current_user.id)
+
+     @user.purchase_sum += @shopping_cart.current_cost
+     @user.save
+     @shopping_cart.current_cost = 0
+     @shopping_cart.save
+
      @shopping_cart.articles.each do |art|
        @past_purchase = PastPurchase.find_by(article_id: art.id)
        if @past_purchase != nil
