@@ -28,7 +28,7 @@ Ukupna cijena izabranih proizvoda je:
         <% @articles.each do |a| %>
             <% if a.id.to_s == k %>
                 <%=  a.title  %><%=  a.cost  %> <%=  "#{v}"  %> <%= link_to '-', shopping_carts_destroy_path(a.id ) %> <%= link_to '+', shopping_carts_create_path(a.id ) %> </br>
-
+                <%= number_field_tag 'kolicina', "#{v}"  %>
             <% end %>
         <% end %>
 <% end %>

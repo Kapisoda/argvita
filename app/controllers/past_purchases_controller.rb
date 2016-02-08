@@ -12,10 +12,7 @@ class PastPurchasesController < ApplicationController
 
      @user = User.find_by(id: current_user.id)
 
-     @user.purchase_sum += @shopping_cart.current_cost
-     @user.save
-     @shopping_cart.current_cost = 0
-     @shopping_cart.save
+
 
      @shopping_cart.articles.each do |art|
        @past_purchase = PastPurchase.find_by(article_id: art.id)
@@ -32,6 +29,10 @@ class PastPurchasesController < ApplicationController
 
      #@user = User.find_by(id: current_user.id)
     # @user.purchase_sum += @shopping_cart.current_cost
+     @user.purchase_sum += @shopping_cart.current_cost
+     @user.save
+     @shopping_cart.current_cost = 0
+     @shopping_cart.save
 
 
      CartsArticle.destroy_all(shopping_cart_id: @shopping_cart.id)

@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
 
 
+  validates :name, :address, :state, :postcode, :phone, presence: true
+
   private
 
   def subscribe_user_to_mailing_list
