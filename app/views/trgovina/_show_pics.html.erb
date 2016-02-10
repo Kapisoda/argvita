@@ -7,7 +7,7 @@
           <div class="product-one col-md-4 product-left ">
             <div class="product-main simpleCart_shelfItem">
               <!--TODO: upisati naziv slike-->
-              <a href="#dialog" name="modal" class="mask"> <% if art.picture != nil %><%=image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> <% end %></a>
+              <a href="#dialog" name="modal" class="mask"> <%=image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> </a>
               <div class="product-bottom">
                 <h3><%= art.title %></h3>
                 <!--NOTE: kratki opis od jednog reda-->
@@ -29,3 +29,4 @@
 
     </div>
 
+    <%= paginate articles %>
