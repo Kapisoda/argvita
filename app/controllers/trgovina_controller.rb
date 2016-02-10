@@ -15,8 +15,11 @@ class TrgovinaController < ApplicationController
     @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
                                                                                                                              with_category_id: Category.options_for_select,
                                                                                                                              with_material_id: Material.options_for_select}) or return
-    @articles = @filterrific.find.page(params[:page])
-
+    if params[:page]
+      @articles = @filterrific.find.page(params[:page])
+    else
+      @articles = @filterrific.find.page(1)
+    end
     respond_to do |format|
       format.html
       format.js
