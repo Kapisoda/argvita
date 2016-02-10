@@ -25,7 +25,32 @@
 
     <div class="col-md-3 prdt-right">
         <div class="w_sidebar">
+          <section class="sky-form">
+            <h4>Materijal</h4>
+            <div class="row1 scroll-pane" >
 
+              <div class="col col-4">
+                <% @materials.each do |a| %>
+
+                <label class="checkbox">
+                  <%= f.check_box(:with_material_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false) %><i></i> <%= a.title %></label>
+                <% end %>
+              </div>
+            </div>
+          </section>
+          <section class="sky-form">
+            <h4>Kategorije</h4>
+            <div class="row1 scroll-pane">
+
+              <div class="col col-4">
+                <% @categories.all.each do |a| %>
+                <label class="checkbox">
+                  <%= f.check_box(:with_category_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                <% end %>
+
+              </div>
+            </div>
+          </section>
 
 
           <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
