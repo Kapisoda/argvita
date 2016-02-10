@@ -7,13 +7,10 @@
 
   <title>Argvita</title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application','http://code.jboxcdn.com/0.3.2/jBox.css','https://fonts.googleapis.com/css?family=Exo+2:400,300,600|Bree+Serif|Nunito:700&subset=latin,latin-ext', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
 
   <%= javascript_include_tag "http://code.jboxcdn.com/0.3.2/jBox.min.js" %>
-
-  <%= stylesheet_link_tag "http://code.jboxcdn.com/0.3.2/jBox.css" %>
-  <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Exo+2:400,300,600|Bree+Serif|Nunito:700&subset=latin,latin-ext" %>
 
 
   <%= favicon_link_tag 'images/apple-icon-57x57.png', rel: 'apple-touch-icon', type: 'image/png' %>
@@ -35,12 +32,15 @@
 <body>
 
 
+
+
 <!--top-header-->
 <div class="top-header row">
   <div class="top-header-main col-md-12">
     <div class="col-md-8">
       <div class="nlogo">
         <a href="index.html"><%=image_tag("av-color.png", class: "logoav") %></a>
+
 
       </div>
 
@@ -67,7 +67,11 @@
           <a href="#" title="View your shopping cart" class="cart-link">
             <i><%=image_tag("cart-2.png") %></i>
             <span class="amount"><%=   number_to_currency(@shopping_cart.current_cost, :unit => 'Kn', :format => "%n %u") %></span>
-            <span class="contents"><%= @carts_article.amount %></span>
+            <% i=0 %>
+            <% @shopping_cart.carts_articles.each do |cart| %>
+                <% i +=cart.amount %>
+                <% end %>
+            <span class="contents"><%= i %></span>
           </a>
 
           <div class="cart">
@@ -136,10 +140,28 @@
   </div>
 </div>
 
+
 <!--top-header-->
 <!--start-logo-->
 <div class="logo">
   <a href="index.html"><h1>Argentum Vita</h1></a>
+
+</div>
+<div>
+  <% if flash[:error] %>
+      <div class="alert alert-danger" role="alert" style="margin: 15px 35px 15px 35px">
+        <span class="sr-only">Error:</span>
+        <strong>Oprez! <%= flash[:error] %></strong>
+      </div>
+  <% end %>
+
+      <% if flash[:notice] %>
+          <div class="alert alert-success" role="alert" style="margin: 15px 35px 15px 35px">
+            <span class="sr-only">Success:</span>
+            <strong><%= flash[:notice] %></strong>
+          </div>
+
+  <% end %>
 </div>
 <!--start-logo-->
 <!--bottom-header-->
@@ -151,9 +173,11 @@
           <ul class="memenu skyblue">
 
 
-            <li class="<%= params[:controller]== 'home' ? 'active' : '' %>" ><%= link_to 'Početna', root_path %></li>
 
-            <li class="<%= params[:controller]== 'trgovina' && params[:action] == 'index' ? 'active' : '' %>"> <%= link_to 'Trgovina', trgovina_index_path %></a>
+
+            <li class="<%= params[:controller]== 'home' ? 'active' : '' %>" ><%= link_to 'Početna', root_path, :method => :get%></li>
+
+            <li class="<%= params[:controller]== 'trgovina' && params[:action] == 'index' ? 'active' : '' %>"> <%= link_to 'Trgovina', trgovina_index_path, :method => :get %>
 
             </li>
             <li class="grid"><a href="#">Artikli na akciji</a>
@@ -288,7 +312,6 @@
             </div>
           </div>
         </div>
-
 
       </div>
 

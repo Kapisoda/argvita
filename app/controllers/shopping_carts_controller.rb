@@ -96,7 +96,7 @@ class ShoppingCartsController < ApplicationController
 
 
 
-    redirect_to shopping_carts_show_path
+    redirect_to :back
 
   end
 

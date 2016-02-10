@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
     else
-      @articles = Article.where(id: $no_user_articles.keys)
+      @articles_no_user = Article.where(id: $no_user_articles.keys)
     end
 
   end

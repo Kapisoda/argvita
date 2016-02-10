@@ -11,7 +11,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( filterrific/filterrific-spinner.gif )
 
-Rails.application.config.assets.precompile += %w( style.css )
 Rails.application.config.assets.precompile += %w( bootstrap.css )
 Rails.application.config.assets.precompile += %w( carts_articles.css )
 Rails.application.config.assets.precompile += %w( categories.css )
@@ -31,7 +30,9 @@ Rails.application.config.assets.precompile += %w( shopping_carts.css )
 Rails.application.config.assets.precompile += %w( sky-forms.css )
 Rails.application.config.assets.precompile += %w( sky-forms-green.css )
 Rails.application.config.assets.precompile += %w( articles.css )
+Rails.application.config.assets.precompile += %w( style.css )
 
+Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( bootstrap.-collapse.js )
 Rails.application.config.assets.precompile += %w( bootstrap-tab.js )
 Rails.application.config.assets.precompile += %w( bootstrap-transition.js )
@@ -96,6 +97,12 @@ Rails.application.config.assets.precompile += %w( ban1.jpg )
 Rails.application.config.assets.precompile += %w( ban2.jpg )
 Rails.application.config.assets.precompile += %w( ban3.jpg )
 
+Rails.application.config.assets.precompile += %w( icons/FontAwsome.otf )
+Rails.application.config.assets.precompile += %w( icons/fontawsome-webfont.eot )
+Rails.application.config.assets.precompile += %w( icons/fontawsome-webfont.svg )
+Rails.application.config.assets.precompile += %w( icons/fontawsome-webfont.ttf )
+Rails.application.config.assets.precompile += %w( icons/fontawsome-webfont.woff )
 
 
+Rails.application.config.assets.precompile += %w( *.svg *.eot *.woff *.ttf )
 

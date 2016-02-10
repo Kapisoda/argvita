@@ -1102,7 +1102,7 @@ a.mask {
 	left: 2px;
 	width: 10px;
 	height: 7px;
-	background: url(../images/tick.png) no-repeat;
+	background: url("tick.png") no-repeat;
 	text-align: center;
 }
 .sky-form .radio input:checked + i:after,

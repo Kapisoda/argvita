@@ -5,11 +5,11 @@
             keyboard: true,
             min: 0,
             max: 5000,
-            from: 1000,
-            to: 4000,
+            from: 0,
+            to: 5000,
             type: 'double',
-            step: 1,
-            prefix: "$",
+            step: 10,
+            prefix: " kn",
             grid: true
         });
 

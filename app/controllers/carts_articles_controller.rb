@@ -15,6 +15,8 @@ class CartsArticlesController < ApplicationController
 
   def create
 
+    @article = Article.find(params[:format])
+
     if current_user == nil
 
       @article = Article.find(params[:format])
@@ -39,19 +41,22 @@ class CartsArticlesController < ApplicationController
     else
 
 
+
+
+
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
 
-    if @carts_article == nil
-      CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format], amount: 1 )
-      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
-    else
-      @carts_article.increment!(:amount)
-    end
-  end
 
-    @article = Article.find(params[:format])
+      if @carts_article == nil
+        CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format], amount: 1 )
+        @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
+      elsif @carts_article.amount < @article.amount
+        @carts_article.increment!(:amount)
+      end
+    end
+
     #@carts_articles = CartsArticle.all
 
 
@@ -61,10 +66,19 @@ class CartsArticlesController < ApplicationController
 
         $items_cost += @article.cost
 
-      else
-        @shopping_cart.current_cost += @article.cost
-        @shopping_cart.save
       end
+
+      if current_user != nil
+        if @carts_article.amount < @article.amount
+           @shopping_cart.current_cost += @article.cost
+           @shopping_cart.save
+        else
+          flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+
+        end
+      end
+
+
     else
       if current_user == nil
 

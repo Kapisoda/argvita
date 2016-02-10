@@ -10,8 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+
  *= require bootstrap
+ *= require sky-forms-green
+ *= require flexslider
+ *= require ion.rangeSlider.css
+ *= require ion.rangeSlider.skinHTML5
+ *= require memenu
+ *= require modal
+ *= require normalize
+ *= require owl.carousel
+ *= require owl.theme
+ *= require owl.transitions
  *= require style
- *= require_tree .
- *= require_self
  */

@@ -2,6 +2,7 @@
 
 
 
+
 <!--bottom-header-->
 <!--start-breadcrumbs-->
 <div class="breadcrumbs">
@@ -19,111 +20,84 @@
 <div class="prdt">
   <div class="container">
     <div class="prdt-top">
+      <div class="col-md-9 prdt-left">
 
-        <%= form_for_filterrific @filterrific do |f| %>
+        <%= render(
+                partial: 'trgovina/show_pics',
+                locals: { articles: @articles }
+            ) %>
 
-
-
-          <div class="col-md-9 prdt-left">
-
-            <%= render(
-                    partial: 'trgovina/show_pics',
-                    locals: { articles: @articles }
-                ) %>
-            <!-- artikli -->
-
-            <!--kraj artikla -->
+      </div>
+      <%= form_for_filterrific @filterrific do |f| %>
 
 
-            <!--sidebar -->
-            <div class="clearfix"></div>
-          </div>
-          <br/>
 
-          <div class="row">
 
-            <div class="col-xs-6 col-md-3">
-              Pretraga
-              <br/>
-              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-              <p><%= f.text_field(
-                      :search_query,
-                      class: 'form-control filterrific-periodically-observed'
-                  ) %></p>
+
+
+          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+
+
+
+
+
+
+
+    <div class="col-md-3 prdt-right">
+        <div class="w_sidebar">
+          <section class="sky-form">
+            <h4>Materijal</h4>
+            <div class="row1 scroll-pane" >
+
+              <div class="col col-4">
+                <% Material.all.each do |a| %>
+
+                <label class="checkbox">
+                  <%= f.check_box(:with_material_id, {multiple: true}, a.id, false ) %><i></i> <%= a.title %></label>
+                <% end %>
+              </div>
             </div>
+          </section>
+          <section class="sky-form">
+            <h4>Kategorije</h4>
+            <div class="row1 scroll-pane">
 
-            <div class="col-xs-6 col-md-3">
-              Od
-              <br/>
-              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-              <p><%= f.text_field(
-                      :min_cost,
-                      class: 'form-control filterrific-periodically-observed'
-                  ) %>
-              Do
+              <div class="col col-4">
+                <% Category.all.each do |a| %>
+                <label class="checkbox">
+                  <%= f.check_box(:with_category_id, {multiple: true}, a.id, false ) %><i></i> <%= a.title %></label>
+                <% end %>
+
+              </div>
+            </div>
+          </section>
+
+
+          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+
+
+
+          <section class="sky-form">
+            <h4>CIJENA</h4>
+            <div>
               <%= f.text_field(
-                      :max_cost,
-                      class: 'form-control filterrific-periodically-observed'
-                  ) %></p>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-              Materijal
-              <br/>
-              <p><%= f.select(
-                          :with_material_id,
-                          @filterrific.select_options[:with_material_id],
-                          { include_blank: '- Sve -' }, class: 'form-control'
-                  ) %></p>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-              Kategorija
-              <br/>
-              <p><%= f.select(
-                          :with_category_id,
-                          @filterrific.select_options[:with_category_id],
-                          { include_blank: '- Sve-' }, class: 'form-control'
-                  ) %></p>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-              Sortiraj po
-              <br/>
-              <p><%= f.select(
-                          :sorted_by,
-                          @filterrific.select_options[:sorted_by],
-                          { include_blank: false }, class: 'form-control'
-                  )%></p>
-            </div>
-            <%= render_filterrific_spinner %>
-            <div class="col-xs-6 col-md-3">
-              <%= link_to(
-                      'Reset filters',
-                      reset_filterrific_url,
+                      :min_cost,
+                      class: 'form-control filterrific-periodically-observed', id: 'range', multiple: true
                   ) %>
+
             </div>
+          </section>
 
 
-
-
-          </div>
-          </div>
-    <% end %>
-
-
-
-
-      <div class="row">
-        <div class="col-md-3 col-md-3">
 
         </div>
       </div>
-
+      <% end %>
       <div class="clearfix"></div>
 
+    </div>
   </div>
-</div>
+</div><!--product-end-->
 <!--kraj sidebara -->
 <!--product-end-->
 
@@ -131,25 +105,5 @@
 
 
 
-<script>
-  $(function () {
-
-    $("#range").ionRangeSlider({
-      hide_min_max: true,
-      keyboard: true,
-      min: 0,
-      max: 1000,
-      /*TODO: max cijena na filteru proizvoda/cijena (vidi jel ćeš to vući iz baze ili ćemo stavit samo broj) https://github.com/IonDen/ion.rangeSlider */
-      from: 0,
-      to: 1000,
-      /*NOTE: isti broj kao i max cijena na filteru proizvoda/cijena (to je default vrijednost na filteru) https://github.com/IonDen/ion.rangeSlider */
-      type: 'double',
-      step: 10,
-      postfix: " kn",
-      grid: true
-    });
-
-  });
-</script>
 
 
