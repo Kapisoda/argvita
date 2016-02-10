@@ -1,8 +1,137 @@
-<h1>Home#index</h1>
 
-<p>Find me in app/views/home/index.html.erb</p>
-<%= link_to "Change your password", edit_user_registration_path %>
 
-<%= link_to "nesto", 'http://eepurl.com/bKAcpT' %>#dodan za test paypala
-</br>
-<%= link_to "Account ", clients_show_path %>
+<!--bottom-header-->
+
+<!--banner-starts-->
+<div class="bnr" id="home">
+  <div id="top" class="callbacks_container">
+    <ul class="rslides" id="slider4">
+      <li>
+        <%=image_tag("ban2.jpg") %>
+           </li>
+           <li>
+             <%=image_tag("ban1.jpg") %>
+                </li>
+                <li>
+                  <%=image_tag("ban3.jpg") %>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+</div>
+<!--banner-ends-->
+
+<!--about-starts-->
+
+<div class="about">
+  <div class="container">
+    <div class="about-top grid-1">
+      <div class="col-md-4 about-left">
+        <figure class="effect-bubba shadow">
+          <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
+          <!--TODO: upisati naziv kategorije-->
+          <figcaption>
+            <h2>Naziv kategorije</h2>
+            <p>Kratki opis kategorije</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4 about-left">
+        <figure class="effect-bubba shadow">
+          <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
+          <!--TODO: upisati naziv kategorije-->
+          <figcaption>
+            <h2>Naziv kategorije</h2>
+            <p>Kratki opis kategorije</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4 about-left">
+        <figure class="effect-bubba shadow">
+          <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
+          <!--TODO: upisati naziv kategorije-->
+          <figcaption>
+            <h2>Naziv kategorije</h2>
+            <p>Kratki opis kategorije</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+<!--about-end-->
+
+<!--product-starts-->
+<div class="product">
+  <div class="container">
+    <div class="product-top">
+
+
+
+
+      <% i=0 %>
+          <% @articles.each do |art| %>
+          <%if i == 8 then %>
+              <% break %>
+          <% end %>
+          <% i+=1 %>
+
+
+
+            <div class="product-one col-md-3 product-left ">
+              <div class="product-main simpleCart_shelfItem">
+                <!--TODO: upisati naziv slike-->
+
+                <a href="#dialog" name="modal" class="mask"> <%=image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> </a>
+                <div class="product-bottom">
+                  <h3> <%= art.title %> </h3>
+                  <!--NOTE: kratki opis od jednog reda-->
+                  <p>detalji</p>
+                  <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
+                </div>
+                <div class="srch">
+                  <span>20%</span>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+        <% end %>
+
+    </div>
+  </div>
+</div>
+
+<!--product-end-->
+
+
+
+
+
+
+
+
+
+<!--Registration Form dialog-->
+
+
+
+<!--Registration Form dialog end -->
+
+
+
+
+
+
+
+
+
+
+

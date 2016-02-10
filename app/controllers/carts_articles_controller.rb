@@ -75,7 +75,7 @@ class CartsArticlesController < ApplicationController
         @shopping_cart.save
     end
 
-    redirect_to articles_index_path
+    redirect_to :back
 
   end
 

@@ -14,6 +14,7 @@ class ShoppingCartsController < ApplicationController
 
     else
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
     end
 
 
@@ -61,31 +62,39 @@ class ShoppingCartsController < ApplicationController
       else
         @carts_article.increment!(:amount)
       end
-    end
-
-    @article = Article.find(params[:format])
-    #@carts_articles = CartsArticle.all
 
 
 
-    if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
-      if current_user == nil
+      @article = Article.find(params[:format])
+      #@carts_articles = CartsArticle.all
 
-        $items_cost += @article.cost
 
+
+      if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
+        if current_user == nil
+
+          $items_cost += @article.cost
+
+        else
+          @shopping_cart.current_cost += @article.cost
+          @shopping_cart.save
+        end
       else
-        @shopping_cart.current_cost += @article.cost
+        if current_user == nil
+
+          $items_cost += (@article.cost- (@article.cost*@article.discount/100))
+
+        end
+        @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
         @shopping_cart.save
       end
-    else
-      if current_user == nil
 
-        $items_cost += (@article.cost- (@article.cost*@article.discount/100))
 
-      end
-      @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
-      @shopping_cart.save
+
+
     end
+
+
 
     redirect_to shopping_carts_show_path
 
@@ -160,7 +169,7 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
-    redirect_to shopping_carts_show_path
+    redirect_to :back
   end
 
 

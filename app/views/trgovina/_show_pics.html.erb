@@ -1,0 +1,32 @@
+    <div id="filterrific_results">
+
+
+
+      <% articles.each do |art| %>
+
+          <div class="product-one col-md-4 product-left ">
+            <div class="product-main simpleCart_shelfItem">
+              <!--TODO: upisati naziv slike-->
+              <a href="#dialog" name="modal" class="mask"> <%=image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> </a>
+              <div class="product-bottom">
+                <h3><%= art.title %></h3>
+                <!--NOTE: kratki opis od jednog reda-->
+                <p>detalji</p>
+
+                <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
+              </div>
+              <div class="srch">
+                <span>20%</span>
+              </div>
+            </div>
+          </div>
+      <% end %>
+
+
+
+
+
+
+    </div>
+
+    <%= paginate articles %>

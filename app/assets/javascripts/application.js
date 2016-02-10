@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require filterrific/filterrific-jquery
 //= require filter
+//= require modal
 //= require_tree .

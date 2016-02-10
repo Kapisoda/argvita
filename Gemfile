@@ -33,7 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 #dodano
-gem 'bootstrap-sass', '~> 3.3.5'
+
 gem 'autoprefixer-rails'
 gem 'devise'
 gem 'gibbon'
@@ -53,7 +53,11 @@ gem 'whenever', :require => false
 
 gem 'rails_12factor', group: :production
 
+gem 'meta-tags', '~> 2.1'
 
+gem 'paperclip', '~> 4.3'
+
+gem 'aws-sdk', '< 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

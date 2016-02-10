@@ -4,4 +4,10 @@ class Picture < ActiveRecord::Base
   belongs_to :article
 
   belongs_to :single_article
+
+  has_attached_file :image,
+                    :styles => {thumb: "300x300>", original: "1000x1000>", gallery: "200x200#", table: "50x50#", index: "125x200#", show: "263x362#"}
+
+
+  do_not_validate_attachment_file_type :image
 end

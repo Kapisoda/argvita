@@ -14,6 +14,16 @@ Rails.application.configure do
 
   ################################################################################
 
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_host_name => "s3.eu-central-1.amazonaws.com",
+      :s3_credentials => {
+          :bucket => ENV['STOR'],
+          :access_key_id => ENV['ACC_ID'],
+          :secret_access_key => ENV['SEC']
+      }
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

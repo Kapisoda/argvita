@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'trgovina/index'
+
+  get 'trgovina/show'
+
   get 'past_purchases/index'
 
   get 'past_purchases/show'
@@ -74,7 +78,6 @@ Rails.application.routes.draw do
   get 'home/index'
 
 
-
   resources :articles
   resources :categories
   resources :clients
@@ -82,6 +85,7 @@ Rails.application.routes.draw do
   resources :ssubcategories
   resources :shopping_carts
   resources :carts_articles
+  resources :trgovina
 
   devise_for :users, controllers: { registrations: "users/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
