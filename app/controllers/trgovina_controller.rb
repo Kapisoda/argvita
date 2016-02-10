@@ -1,6 +1,7 @@
 class TrgovinaController < ApplicationController
   def index
     @categories = Category.all
+    @materials = Material.all
 
     if current_user != nil
       @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
@@ -15,11 +16,9 @@ class TrgovinaController < ApplicationController
     @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
                                                                                                                              with_category_id: Category.options_for_select,
                                                                                                                              with_material_id: Material.options_for_select}) or return
-    if params[:page]
-      @articles = @filterrific.find.page(params[:page])
-    else
-      @articles = @filterrific.find.page(1)
-    end
+
+    @articles = @filterrific.find.page(params[:page])
+
     respond_to do |format|
       format.html
       format.js

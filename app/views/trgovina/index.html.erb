@@ -30,7 +30,7 @@
             <div class="row1 scroll-pane" >
 
               <div class="col col-4">
-                <% Material.all.each do |a| %>
+                <% @materials.each do |a| %>
 
                 <label class="checkbox">
                   <%= f.check_box(:with_material_id, {multiple: true}, a.id, false ) %><i></i> <%= a.title %></label>
@@ -43,7 +43,7 @@
             <div class="row1 scroll-pane">
 
               <div class="col col-4">
-                <% Category.all.each do |a| %>
+                <% @categories.all.each do |a| %>
                 <label class="checkbox">
                   <%= f.check_box(:with_category_id, {multiple: true}, a.id, false ) %><i></i> <%= a.title %></label>
                 <% end %>
