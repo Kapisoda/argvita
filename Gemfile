@@ -51,7 +51,7 @@ gem 'simple_form'
 
 gem 'whenever', :require => false
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor'
 
 gem 'meta-tags', '~> 2.1'
 

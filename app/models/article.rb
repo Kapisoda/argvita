@@ -22,6 +22,7 @@ class Article < ActiveRecord::Base
 
   has_many :pictures, :dependent => :destroy
 
+  attr_accessor :color
 
 
   def provjera

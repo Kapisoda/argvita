@@ -79,7 +79,7 @@
 
                   <% @shopping_cart.carts_articles.each do |i| %>
 
-
+                   <% if !i.article.nil? %>
                             <li class="clearfix">
                               <%= link_to i.article.title, article_path(i.article.id), class: "item-title" %>
                               <%=image_tag(i.article.picture.image.url(:table), class: "productimg") %>
@@ -88,8 +88,19 @@
                               <span class="quantity"><%= i.amount %></span>
                               <%= link_to 'remove', shopping_carts_destroy_path(i.article.id ), class: "quantity" %>
                             </li>
+                    <% else %>
+
+                        <li class="clearfix">
+                          <%= link_to i.single_article.title, article_path(i.single_article.article.id), class: "item-title" %>
+                          <%=image_tag(i.single_article.article.picture.image.url(:table), class: "productimg") %>
+                            <!-- TODO napravi da se prikazuje slika od tocno tog single_article-a, a ne od cijelokupnog artikla -->
+                          <span class="item-price"><%  number_to_currency(i.single_article.article.cost, :unit => 'Kn', :format => "%n %u") %></span>
+                          <span class="quantity"><%= i.amount %></span>
+                          <%= link_to 'remove', destroy_single_shopping_carts_path(i.single_article.id), :method => :put, class: "quantity" %>
+                        </li>
 
                   <% end %>
+                <% end %>
 
               </ul>
             </div>

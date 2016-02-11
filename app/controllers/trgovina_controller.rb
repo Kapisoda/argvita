@@ -41,5 +41,17 @@ class TrgovinaController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:format])
+
+    if current_user != nil
+      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+
+      puts "Shopping cart ID: #{@shopping_cart.id}"
+
+      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
+    else
+      puts "NEMA USER-A!!!!"
+      @articles_no_user = Article.where(id: $no_user_articles.keys)
+    end
   end
 end

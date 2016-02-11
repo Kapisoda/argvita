@@ -83,8 +83,13 @@ Rails.application.routes.draw do
   resources :clients
   resources :subcategories
   resources :ssubcategories
-  resources :shopping_carts
-  resources :carts_articles
+  resources :shopping_carts do
+    put :destroy_single, on: :collection
+  end
+  resources :carts_articles do
+    put :single, on: :collection
+    put :create_single, on: :collection
+  end
   resources :trgovina
 
   devise_for :users, controllers: { registrations: "users/registrations"}

@@ -83,8 +83,8 @@
             <div class="product-one col-md-3 product-left ">
               <div class="product-main simpleCart_shelfItem">
                 <!--TODO: upisati naziv slike-->
-
-                <a href="#dialog" name="modal" class="mask"> <%=image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> </a>
+                <%=link_to  trgovina_show_path(art.id)  do %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img") %> <% end %>
+                <!--<a href="#dialog" name="modal" class="mask"> </a>-->
                 <div class="product-bottom">
                   <h3> <%= art.title %> </h3>
                   <!--NOTE: kratki opis od jednog reda-->

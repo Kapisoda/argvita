@@ -110,6 +110,8 @@ class ShoppingCartsController < ApplicationController
   def destroy
     @article = Article.find(params[:format])
 
+    puts "usao sam u destroy!!!!"
+
     if current_user == nil
 
       if $no_user_articles.has_key?(@article.id.to_s)
@@ -170,6 +172,44 @@ class ShoppingCartsController < ApplicationController
   end
 
     redirect_to :back
+  end
+
+
+
+  def destroy_single
+
+    @single_article = SingleArticle.find(params[:format])
+    @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:format] )
+
+      puts "usao sam u destroy single"
+
+
+    if @carts_article.amount > 1
+      @carts_article.amount -= 1
+      @carts_article.save
+      if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
+        @shopping_cart.current_cost -= @single_article.article.cost
+        @shopping_cart.save
+      else
+        @shopping_cart.current_cost -= (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
+        @shopping_cart.save
+      end
+    else
+      if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
+        @shopping_cart.current_cost -= @single_article.article.cost
+        @shopping_cart.save
+      else
+        @shopping_cart.current_cost -= (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
+        @shopping_cart.save
+      end
+      @carts_article.destroy!
+    end
+
+
+
+    redirect_to :back
+
   end
 
 

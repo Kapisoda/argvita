@@ -40,10 +40,6 @@ class CartsArticlesController < ApplicationController
 
     else
 
-
-
-
-
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
@@ -55,9 +51,9 @@ class CartsArticlesController < ApplicationController
       elsif @carts_article.amount < @article.amount
         @carts_article.increment!(:amount)
       end
+
     end
 
-    #@carts_articles = CartsArticle.all
 
 
 
@@ -92,6 +88,106 @@ class CartsArticlesController < ApplicationController
     redirect_to :back
 
   end
+
+  def single
+    @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+    art = Article.find_by(id: params[:article][:id])
+
+    if art.on_discount != nil && art.on_discount == true
+      prize = (art.cost- (art.cost*art.discount/100))
+    else
+      prize = art.cost
+    end
+
+    if params[:article][:color] || params[:article][:size]
+
+      puts "Usao sam u single_article carts_article"
+
+      if params[:article][:size]
+
+        puts "Usao sam u size"
+
+        @sa = SingleArticle.where(article_id: params[:article][:id],size: params[:article][:size] )
+      elsif params[:article][:color]
+
+        puts "Usao sam u color"
+
+        @sa = SingleArticle.find_by("article_id = ? AND color_id = ?", params[:article][:id], params[:article][:color])
+      end
+
+      puts "ID od single article-a je #{@sa.id}"
+
+      CartsArticle.create(single_article_id: @sa.id, shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount])
+
+    else
+
+      CartsArticle.create(article_id: params[:article][:id], shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount] )
+
+    end
+
+    @shopping_cart.current_cost += prize
+    @shopping_cart.save
+
+    redirect_to trgovina_index_path
+  end
+
+
+
+  def create_single
+
+    puts "USAO SAM U CREATE SINGLE"
+
+    @single_article = SingleArticle.find(params[:format])
+
+    @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:format] )
+
+    if @carts_article.amount < @single_article.amount
+      @carts_article.increment!(:amount)
+    end
+
+
+    if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
+      if current_user == nil
+
+        $items_cost += @single_article.article.cost
+
+      end
+
+      if current_user != nil
+        if @carts_article.amount < @single_article.article.amount
+          @shopping_cart.current_cost += @single_article.article.cost
+          @shopping_cart.save
+        else
+          flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+
+        end
+      end
+
+
+    else
+      if current_user == nil
+
+        $items_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
+
+      end
+      @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
+      @shopping_cart.save
+    end
+
+
+
+    redirect_to shopping_carts_show_path
+
+
+  end
+
+
+
+
+
+
 
 
         def edit
