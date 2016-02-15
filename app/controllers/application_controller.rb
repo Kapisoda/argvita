@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 
 
 
-
   before_action :set_user
 
 
@@ -16,7 +15,9 @@ class ApplicationController < ActionController::Base
     if $no_user_articles == nil
     $no_user_articles = Hash.new
     $no_user_articles_int = Hash.new
+    $no_user_single_articles = Hash.new
     $items_cost = 0
+
     end
   end
 end

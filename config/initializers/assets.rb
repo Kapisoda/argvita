@@ -96,6 +96,14 @@ Rails.application.config.assets.precompile += %w( Untiled-1-Recoverd_Recoverd.ps
 Rails.application.config.assets.precompile += %w( ban1.jpg )
 Rails.application.config.assets.precompile += %w( ban2.jpg )
 Rails.application.config.assets.precompile += %w( ban3.jpg )
+Rails.application.config.assets.precompile += %w( placeholder_index.png )
+Rails.application.config.assets.precompile += %w( default-placeholder.png )
+Rails.application.config.assets.precompile += %w( default-placeholder-2.png )
+
+Rails.application.config.assets.precompile += %w( 12.jpg )
+Rails.application.config.assets.precompile += %w( 13.jpg )
+Rails.application.config.assets.precompile += %w( 14.jpg )
+Rails.application.config.assets.precompile += %w( 15.png )
 
 Rails.application.config.assets.precompile += %w( icons/FontAwsome.otf )
 Rails.application.config.assets.precompile += %w( icons/fontawsome-webfont.eot )

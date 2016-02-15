@@ -43,6 +43,8 @@
   </li>
 
 
+  <% if current_user != nil %>
+
 <% @shopping_cart.carts_articles.each do |a| %>
 
 
@@ -52,7 +54,12 @@
     <div class="row" >
       <% if !a.article.nil? %>
       <div class="col-xs-6 col-md-1" >
-        <%= image_tag(a.article.picture.image.url(:table)) %>
+        <% if a.article.picture != nil %>
+            <%= image_tag(a.article.picture.image.url(:table)) %>
+        <% else %>
+            <%=image_tag("default-placeholder.png", class: "productimg" ) %>
+        <% end %>
+
       </div>
 
       <div class="col-xs-6 col-md-3" >
@@ -89,7 +96,14 @@
 
 
           <div class="col-xs-6 col-md-1" >
-            <%= image_tag(a.single_article.article.picture.image.url(:table)) %>
+            <% if a.single_article.article.picture != nil %>
+                <%= image_tag(a.single_article.article.picture.image.url(:table)) %>
+            <% else %>
+                <%=image_tag("default-placeholder-2.png", class: "productimg" ) %>
+            <% end %>
+
+
+
           </div>
 
           <div class="col-xs-6 col-md-3" >
@@ -137,9 +151,140 @@
         </div>
     </div>
   </li>
+
+
+
+      <% else %>
+
+        <% $no_user_articles.each do |k, v| %>
+          <% @no_articles.each do |a| %>
+
+              <% if a.id == k.to_i %>
+              <li class="list-group-item"  >
+                <div class="row" >
+
+                  <div class="col-xs-6 col-md-1" >
+                  <% if a.picture != nil %>
+                      <%= image_tag(a.picture.image.url(:table)) %>
+                  <% else %>
+                      <%=image_tag("default-placeholder.png", class: "productimg" ) %>
+                  <% end %>
+
+                </div>
+
+                <div class="col-xs-6 col-md-3" >
+                  <div class="item-title"> <%=  a.title  %> </div>
+                </div>
+
+                <div class="col-xs-6 col-md-4">
+                  <div class="col-xs-6 col-md-1" style="width: auto; height: auto;">
+                    <%= link_to '-', shopping_carts_destroy_path(a.id ), class: "btn btn-default" %>
+                  </div>
+
+                  <div class="col-xs-6 col-md-2" style="width: auto; height:auto;">
+                    <div class="item-title"> <%=  "#{v}" %></div>
+                  </div>
+
+                  <div class="col-xs-6 col-md-2" style="width: auto; height: auto;">
+                    <%= link_to '+', carts_articles_create_path(a.id ), class: "btn btn-default " %>
+                  </div>
+                </div>
+
+
+                <div class="col-xs-6 col-md-2">
+                  <div class="item-price" style="text-align: right;"><%if !a.on_discount.nil? && !a.on_discount? && a.discount != 0 %> <%=  number_to_currency((a.cost-(a.cost*a.discount/100)), :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.cost, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+                </div>
+
+                <div class="col-xs-6 col-md-2" style="text-align: right;">
+                  <div class="item-price"><%if !a.on_discount.nil? && !a.on_discount? && a.discount != 0 %> <%=  number_to_currency((a.cost-(a.cost*a.discount/100))*v, :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.cost*v, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+                </div>
+
+
+
+              <% end %>
+          <% end %>
+
+          </div>
+          </li>
+         <% end %>
+
+      <% $no_user_single_articles.each do |k, v| %>
+          <% @sa.each do |a| %>
+              <% if a.id == k %>
+                  <li class="list-group-item"  >
+                    <div class="row" >
+
+                      <div class="col-xs-6 col-md-1" >
+                        <% if a.pictures.first != nil %>
+                            <%= image_tag(a.pictures.first.image.url(:table)) %>
+                        <% else %>
+                            <%=image_tag("default-placeholder.png", class: "productimg" ) %>
+                        <% end %>
+
+                      </div>
+
+                      <div class="col-xs-6 col-md-3" >
+                        <div class="item-title"> <%=  a.title  %> </div>
+                      </div>
+
+                      <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-6 col-md-1" style="width: auto; height: auto;">
+                          <%= link_to '-', min_no_user_carts_articles_path(a.id ), :method => :put ,class: "btn btn-default" %>
+                        </div>
+
+                        <div class="col-xs-6 col-md-2" style="width: auto; height:auto;">
+                          <div class="item-title"> <%=  "#{v}" %></div>
+                        </div>
+
+                        <div class="col-xs-6 col-md-2" style="width: auto; height: auto;">
+                          <%= link_to '+', plus_no_user_carts_articles_path(a.id ), :method => :put, class: "btn btn-default " %>
+                        </div>
+                      </div>
+
+
+                      <div class="col-xs-6 col-md-2">
+                        <div class="item-price" style="text-align: right;"><%if !a.article.on_discount.nil? && !a.article.on_discount? && a.article.discount != 0 %> <%=  number_to_currency((a.article.cost-(a.article.cost*a.article.discount/100)), :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.article.cost, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+                      </div>
+
+                      <div class="col-xs-6 col-md-2" style="text-align: right;">
+                        <div class="item-price"><%if !a.article.on_discount.nil? && !a.article.on_discount? && a.article.discount != 0 %> <%=  number_to_currency((a.article.cost-(a.article.cost*a.article.discount/100))*v, :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.article.cost*v, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+                      </div>
+
+
+
+              <% end %>
+          <% end %>
+
+          </div>
+          </li>
+      <% end %>
+
+
+
+
+
+
+
+
+
+
+      <li class="list-group-item"  >
+        <div class="row" >
+          <div class="col-xs-6 col-md-12">
+            <div class="item-title" style="text-align: right;">Ukupna cijena izabranih proizvoda je:</div>
+
+            <div class="item-price"  style="text-align: right;"><%= number_to_currency($items_cost, :unit => 'Kn', :format => "%n %u") %></div>
+            </br>
+
+          </div>
+        </div>
+      </li>
+
+
+
+      <% end %>
+
 </ul>
-
-
 
 
 <div style="margin-top: 20px;">

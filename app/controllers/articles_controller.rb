@@ -54,6 +54,11 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    if current_user == nil
+      @articles = Article.where(id: $no_user_articles.keys)
+      @sa = SingleArticle.where(id: $no_user_single_articles.keys)
+    end
+
     @article = Article.find(params[:id])
    # @article = Article.all
     #@article.increment!(:counter)

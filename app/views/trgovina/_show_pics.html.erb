@@ -7,7 +7,7 @@
           <div class="product-one col-md-4 product-left ">
             <div class="product-main simpleCart_shelfItem">
               <!--TODO: upisati naziv slike-->
-              <%=link_to  trgovina_show_path(art.id)  do %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img") %> <% end %>
+              <%=link_to  trgovina_show_path(art.id)  do %> <% if !art.picture.nil? %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img") %><% else %> <%= image_tag('placeholder_index.png', class: "img-responsive zoom-img") %> <% end %> <% end %>
               <div class="product-bottom">
                 <h3><%= art.title %></h3>
                 <!--NOTE: kratki opis od jednog reda-->

@@ -109,11 +109,11 @@ class Article < ActiveRecord::Base
 
 # scopovi za podkategorije i podpodkategorije
   scope :with_subcategory_id, lambda { |subcategory_ids|
-    where(category_id: [*subcategory_ids])
+    where(subcategory_id: [*subcategory_ids])
   }
 
   scope :with_ssubcategory_id, lambda { |ssubcategory_ids|
-    where(category_id: [*ssubcategory_ids])
+    where(ssubcategory_id: [*ssubcategory_ids])
   }
 
 ##################################################################

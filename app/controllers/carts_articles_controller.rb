@@ -17,9 +17,9 @@ class CartsArticlesController < ApplicationController
 
     @article = Article.find(params[:format])
 
-    if current_user == nil
+    if current_user == nil  # kad nema usera #############################################################################################
 
-      @article = Article.find(params[:format])
+
 
 
       puts "Ispred if za provjeru jel se artikl nalazi u hash-u"
@@ -27,18 +27,18 @@ class CartsArticlesController < ApplicationController
         $no_user_articles.each do |k, v|
           if k == @article.id.to_s
             $no_user_articles[k] += 1
-            $items_cost +=@article.cost
+
           end
         end
       else
         puts "Unutar if-else-a kada nije pronaden artikl unutar hash-a"
         $no_user_articles[params[:format]] = 1
-        $items_cost +=@article.cost
+
       end
 
 
 
-    else
+    else   # kad ima usera ################################################################################################################
 
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
@@ -90,7 +90,11 @@ class CartsArticlesController < ApplicationController
   end
 
   def single
+
+    if current_user != nil  #kad ima usera #############################################################################################################################
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+    end
+
     art = Article.find_by(id: params[:article][:id])
 
     if art.on_discount != nil && art.on_discount == true
@@ -108,6 +112,7 @@ class CartsArticlesController < ApplicationController
         puts "Usao sam u size"
 
         @sa = SingleArticle.where(article_id: params[:article][:id],size: params[:article][:size] )
+
       elsif params[:article][:color]
 
         puts "Usao sam u color"
@@ -117,16 +122,49 @@ class CartsArticlesController < ApplicationController
 
       puts "ID od single article-a je #{@sa.id}"
 
+      if current_user != nil
       CartsArticle.create(single_article_id: @sa.id, shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount])
+      end
 
     else
 
+      if current_user != nil
       CartsArticle.create(article_id: params[:article][:id], shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount] )
-
+      end
     end
 
+    if current_user != nil
     @shopping_cart.current_cost += prize
     @shopping_cart.save
+    end
+
+
+
+
+    if current_user == nil # dodaje single article u hash single article ##############################################################
+      if @sa != nil
+        puts "single article nije nil"
+        if $no_user_single_articles.has_key?(@sa.id.to_s)
+          puts "nasao je taj key od single article-a"
+          $no_user_single_articles.each do |k, v|
+            if k == @sa.id.to_s
+              $no_user_single_articles[k] += 1
+              puts "nasao je da postoji vec u varijabli"
+            end
+          end
+    else
+      puts "Unutar if-else-a kada nije pronaden artikl unutar hash-a"
+      $no_user_single_articles[@sa.id] = 1
+    end
+    $items_cost+=prize
+    end
+    end
+
+    $no_user_single_articles.each do |k,v|
+      puts "#{k}"
+    end
+############################################################################################################################################
+
 
     redirect_to trgovina_index_path
   end
@@ -139,6 +177,9 @@ class CartsArticlesController < ApplicationController
 
     @single_article = SingleArticle.find(params[:format])
 
+
+    if current_user != nil  # kad ima usera #############################################################################################
+
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:format] )
@@ -147,6 +188,23 @@ class CartsArticlesController < ApplicationController
       @carts_article.increment!(:amount)
     end
 
+    else  #kad nema usera   ################################################################################################################
+
+
+      if $no_user_articles.has_key?(@single_article.id.to_s)
+        $no_user_articles.each do |k, v|
+          if k == @article.id.to_s
+            $no_user_articles[k] += 1
+          end
+        end
+      else
+        $no_user_articles[params[:format]] = 1
+      end
+
+
+
+
+    end  ###################################################################################################################################
 
     if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
       if current_user == nil
@@ -178,6 +236,8 @@ class CartsArticlesController < ApplicationController
 
 
 
+
+
     redirect_to shopping_carts_show_path
 
 
@@ -185,8 +245,77 @@ class CartsArticlesController < ApplicationController
 
 
 
+  def plus_no_user
+
+    @no_articles = Article.where(id: $no_user_articles.keys)
+    @sa = SingleArticle.where(id: $no_user_single_articles.keys)
+
+    puts "uso plus _no user"
 
 
+    art = SingleArticle.find_by(id: params[:format])
+
+    if art.article.on_discount != nil && art.article.on_discount == true
+      prize = (art.article.cost- (art.article.cost*art.article.discount/100))
+    else
+      prize = art.article.cost
+    end
+
+
+
+        puts "uso u has key?"
+       $no_user_single_articles.each do |k, v|
+         puts "uso u no user articles petlju"
+         if k == art.id
+           puts "uso u if provjeru"
+          $no_user_single_articles[k] += 1
+          $items_cost+=prize
+         end
+          end
+
+
+    redirect_to :back
+  end
+
+  def min_no_user
+
+    @articles = Article.where(id: $no_user_articles.keys)
+    @sa = SingleArticle.where(id: $no_user_single_articles.keys)
+
+    puts "uso plus _no user"
+
+
+    art = SingleArticle.find_by(id: params[:format])
+
+    if art.article.on_discount != nil && art.article.on_discount == true
+      prize = (art.article.cost- (art.article.cost*art.article.discount/100))
+    else
+      prize = art.article.cost
+    end
+
+
+
+    puts "uso u has key?"
+    $no_user_single_articles.each do |k, v|
+      puts "uso u no user articles petlju"
+      if k == art.id
+        if v > 1
+        puts "uso u if provjeru"
+        $no_user_single_articles[k] -= 1
+        $items_cost-=prize
+        else
+          $no_user_single_articles.delete(k)
+          $items_cost-=prize
+        end
+      end
+    end
+
+
+    redirect_to :back
+
+
+
+  end
 
 
 

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'repromaterijal/index'
+
+  get 'repromaterijal/show'
+
   get 'trgovina/index'
 
   get 'trgovina/show'
@@ -30,6 +34,10 @@ Rails.application.routes.draw do
   get 'carts_articles/update'
 
   get 'carts_articles/destroy'
+
+  get 'carts_articles/plus_no_user'
+
+  get 'carts_articles/min_no_user'
 
   get 'shopping_carts/index'
 
@@ -77,6 +85,13 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  get 'trgovina/categories' => "trgovina#categories", :as => 'categories'
+
+  get 'trgovina/index_of' => "trgovina#index_of", :as => 'index_of'
+
+  get 'repromaterijal/categories' => "repromaterijal#categories", :as => 'categories_repro'
+
+  get 'repromaterijal/index_of' => "repromaterijal#index_of", :as => 'index_of_repro'
 
   resources :articles
   resources :categories
@@ -89,8 +104,18 @@ Rails.application.routes.draw do
   resources :carts_articles do
     put :single, on: :collection
     put :create_single, on: :collection
+    put :plus_no_user, on: :collection
+    put :min_no_user, on: :collection
+
   end
-  resources :trgovina
+  resources :trgovina do
+    get :categories, on: :collection
+    put :index_of, on: :collection
+  end
+  resources :repromaterijal do
+    get :categories, on: :collection
+    put :index_of, on: :collection
+  end
 
   devise_for :users, controllers: { registrations: "users/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
