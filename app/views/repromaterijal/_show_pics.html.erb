@@ -9,9 +9,9 @@
           <!--TODO: upisati naziv slike-->
 
           <% if art.picture != nil %>
-                <%=link_to  trgovina_show_path(art.id)  do %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> <% end %>
+                <%=link_to  repromaterijal_show_path(art.id)  do %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> <% end %>
           <% else %>
-                <%=link_to  trgovina_show_path(art.id)  do %> <%= image_tag("placeholder_index.png", class: "img-responsive zoom-img" ) %> <% end %>
+                <%=link_to  repromaterijal_show_path(art.id)  do %> <%= image_tag("placeholder_index.png", class: "img-responsive zoom-img" ) %> <% end %>
           <% end %>
           <div class="product-bottom">
             <h3><%= art.title %></h3>

@@ -26,10 +26,15 @@
             <div id="modal-photo" class="owl-carousel">
 
 
+              <% if !@article.pictures.first.nil? %>
+                  <% @article.pictures.each do |pic| %>
 
-              <% @article.pictures.each do |pic| %>
+                      <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
 
-                  <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
+                  <% end %>
+              <% else %>
+
+                  <div class="item"><%=image_tag( 'default-placeholder-2.png' , class: "Product_photo" ) %></div>
 
               <% end %>
 
@@ -42,7 +47,7 @@
           <div class="col-md-7 details">
 
             <div class="product-bottom">
-              <div class="productboxkat"><%= @article.material.title %></div>
+              <div class="productboxkat"><%= @article.subcategory.title %></div>
               <div class="row naslov-site">
                 <div class="productbox"><%= @article.title %></div>
                 <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
