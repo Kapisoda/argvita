@@ -1,4 +1,4 @@
 <% js = escape_javascript(
-  render(partial: 'trgovina/show_pics', locals: { articles: @articles })
+  render(partial: 'trgovina/cat_pics', locals: { materials: @materials })
 ) %>
 $("#filterrific_results").html("<%= js %>");

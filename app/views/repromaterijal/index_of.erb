@@ -19,51 +19,18 @@
 
 <!--end-breadcrumbs-->
 <!--prdt-starts-->
-<div class="container">
-  <div class="row">
-    <h2>Nađite svoj omiljen proizvod</h2>
-    <div id="custom-search-input">
-      <div class="input-group col-md-12">
-
-        <%= form_for_filterrific @filterrific do |f| %>
-            <!--search-->
-
-            <%= f.text_field(
-                    :search_query,
-                    class: 'form-control filterrific-periodically-observed', placeholder: "pretraga"
-                ) %>
-            <%= render_filterrific_spinner %>
-        <% end %>
-
-
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
+<%= form_for_filterrific @filterrific do |f| %>
 <div class="prdt">
   <div class="container">
     <div class="prdt-top">
       <div class="col-md-9 prdt-left">
-
+        <%= render_filterrific_spinner %>
         <%= render(
                 partial: 'repromaterijal/show_pics',
                 locals: { articles: @articles }
             ) %>
 
       </div>
-      <%= form_for_filterrific @filterrific do |f| %>
 
           <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
 
@@ -73,6 +40,22 @@
               ) %>
           <div class="col-md-3 prdt-right">
             <div class="w_sidebar">
+
+              <section class="sky-form">
+                <h4>Pretraga</h4>
+                <div class="row1 scroll-pane">
+
+                  <div class="col col-4">
+                    <%= f.text_field(
+                            :search_query,
+                            class: 'form-control filterrific-periodically-observed', placeholder: "pretraga proizvoda..."
+                        ) %>
+
+                  </div>
+                </div>
+              </section>
+
+
               <section class="sky-form">
                 <h4>Kategorije</h4>
                 <div class="row1 scroll-pane">
@@ -101,8 +84,6 @@
 
                 </div>
               </section>
-
-
 
             </div>
           </div>

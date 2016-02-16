@@ -10,18 +10,12 @@ class TrgovinaController < ApplicationController
       @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
 
     end
-    @materials = Material.all
-
-
-
 
 
     ########################################################## dodan za search ###########################################################
     @page_title = "Artikli"
-    @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true, material_id: $material_id), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
-                                                                                                                             with_category_id: Category.options_for_select,
-                                                                                                                             with_material_id: Material.options_for_select}) or return
-    @articles = @filterrific.find.page(params[:page])
+    @filterrific = initialize_filterrific(Material.all, params[:filterrific]) or return
+    @materials = @filterrific.find.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -33,15 +27,6 @@ class TrgovinaController < ApplicationController
     puts "Had to reset filterrific params: #{ e.message }"
     redirect_to(reset_filterrific_url(format: :html)) and return
     ############################################################################################################################################
-
-
-
-
-
-
-
-
-
 
   end
 

@@ -1,4 +1,5 @@
 class RepromaterijalController < ApplicationController
+
   def categories
     if current_user == nil
     @no_articles = Article.where(id: $no_user_articles.keys)
@@ -9,16 +10,11 @@ class RepromaterijalController < ApplicationController
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
 
     end
-    @subcategories = Subcategory.all
-
-
 
     ########################################################## dodan za search ###########################################################
     @page_title = "Artikli"
-    @filterrific = initialize_filterrific(Article.where(raw: true, for_sale: true), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
-                                                                                                                             with_category_id: Category.options_for_select,
-                                                                                                                             with_material_id: Material.options_for_select}) or return
-    @articles = @filterrific.find.page(params[:page])
+    @filterrific = initialize_filterrific(Subcategory.all, params[:filterrific]) or return
+    @subcategories = @filterrific.find.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -32,15 +28,8 @@ class RepromaterijalController < ApplicationController
     ############################################################################################################################################
 
 
-
-
-
-
-
-
-
-
   end
+
 
   def index_of
 

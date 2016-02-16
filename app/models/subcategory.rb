@@ -10,4 +10,34 @@ class Subcategory < ActiveRecord::Base
   def self.options_for_select
     order('LOWER(title)').map { |e| [e.title, e.id] }
   end
+
+  filterrific(
+      available_filters: [
+          :search_query
+      ]
+  )
+
+  def self.options_for_select
+    order('LOWER(title)').map { |e| [e.title, e.id] }
+  end
+
+  scope :search_query, lambda { |query|
+
+    return nil  if query.blank?
+
+
+    terms = query.downcase
+
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+
+    # configure number of OR conditions for provision
+    # of interpolation arguments. Adjust this if you
+    # change the number of OR conditions.
+    num_or_conds = 1
+    where(
+        "(LOWER(subcategories.title) LIKE ? OR LOWER(subcategories.title_eng) LIKE ?)", "%#{terms}%", "%#{terms}%"
+    )
+  }
+
 end
