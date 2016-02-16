@@ -17,8 +17,8 @@ class ShoppingCartsController < ApplicationController
       end
 
     else
-    @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
-    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
+      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
     end
 
   end

@@ -1,3 +1,48 @@
+
+<div class="header-bottom">
+  <div class="container">
+    <div class="header">
+
+
+
+
+
+        <div class="search-bar">
+
+          <%= form_for_filterrific @filterrific do |f| %>
+          <!--search-->
+
+              <%= f.text_field(
+                      :search_query,
+                      class: 'form-control filterrific-periodically-observed', placeholder: "pretraga"
+                  ) %>
+              <%= render_filterrific_spinner %>
+          <% end %>
+
+
+
+          <input type="submit" value="">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="bnr" id="home">
   <div id="top" class="callbacks_container">
     <ul class="rslides" id="slider4">
@@ -14,6 +59,7 @@
   </div>
   <div class="clearfix"> </div>
 </div>
+
 
 <div class="about">
   <div class="container">
@@ -37,3 +83,78 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <h2>Nađite svoj omiljen proizvod</h2>
+    <div id="custom-search-input">
+      <div class="input-group col-md-12">
+
+        <%= form_for_filterrific @filterrific do |f| %>
+            <!--search-->
+
+            <%= f.text_field(
+                    :search_query,
+                    class: 'form-control filterrific-periodically-observed', placeholder: "pretraga"
+                ) %>
+            <%= render_filterrific_spinner %>
+        <% end %>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="prdt">
+  <div class="container">
+    <div class="prdt-top">
+      <div class="col-md-9 prdt-left">
+
+        <%= render(
+                partial: 'trgovina/show_pics',
+                locals: { articles: @articles }
+            ) %>
+
+      </div>
+      <%= form_for_filterrific @filterrific do |f| %>
+
+
+<div class="col-md-3 prdt-right">
+  <div class="w_sidebar">
+    <section class="sky-form">
+      <h4>Pretraga<span class="glyphicon glyphicon-search"></span></h4>
+      <div class="row1 scroll-pane">
+
+        <div class="col col-4">
+          <%= f.text_field(
+                  :search_query,
+                  class: 'form-control filterrific-periodically-observed', placeholder: "Pretraži"
+              ) %>
+          <%= render_filterrific_spinner %>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
