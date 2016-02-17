@@ -16,9 +16,11 @@
                 <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
 
               </div>
+              <% if art.on_discount == true && art.discount != 0 %>
               <div class="srch">
-                <span>20%</span>
+                <span><%= art.discount %>%</span>
               </div>
+              <% end %>
             </div>
           </div>
       <% end %>

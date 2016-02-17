@@ -27,17 +27,27 @@
 
 
               <% if !@article.pictures.first.nil? %>
+                  <% @ind = @article.picture.image.url(:picture) %>
                   <% @article.pictures.each do |pic| %>
 
                       <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
 
+                      <% if @ind != pic.image.url(:picture) %>
+                          <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
+                      <% end %>
                   <% end %>
-              <% else %>
-
-                  <div class="item"><%=image_tag( 'default-placeholder-2.png' , class: "Product_photo" ) %></div>
-
               <% end %>
 
+              <% @article.single_articles.each do |sa| %>
+
+                  <% if sa.pictures.first != nil %>
+                      <% sa.pictures.each do |sa_pic| %>
+                          <div class="item"><%= image_tag(sa_pic.image.url(:picture), class: "Product_photo") %></div>
+                      <% end %>
+                  <% end %>
+
+
+              <% end %>
 
 
             </div>

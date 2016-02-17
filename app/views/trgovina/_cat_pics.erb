@@ -7,8 +7,11 @@
             <div class="col-md-4 about-left">
               <%= link_to index_of_trgovina_index_path(id: material.id) do %>
                   <figure class="effect-bubba shadow">
-                    <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
-
+                    <% if material.avatar_file_name.nil? %>
+                      <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
+                    <% else %>
+                      <%= image_tag(material.avatar.url(:index), class: "img-responsive") %>
+                    <% end %>
                     <!--TODO: upisati naziv kategorije-->
                     <figcaption>
                       <h2><%= material.title %></h2>

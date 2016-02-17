@@ -29,10 +29,6 @@ class ShoppingCartsController < ApplicationController
 
 
 
-
-
-
-
   def create
     if current_user == nil
 
