@@ -98,7 +98,13 @@
 
                         <li class="clearfix">
                           <%= link_to i.single_article.title, article_path(i.single_article.article.id), class: "item-title" %>
-                          <%=image_tag(i.single_article.article.picture.image.url(:table), class: "productimg") %>
+                          <% if i.single_article.pictures.first != nil %>
+                              <%=image_tag(i.single_article.pictures.first.image.url(:table), class: "productimg") %>
+                          <% elsif i.single_article.article.picture != nil %>
+                              <%=image_tag(i.single_article.article.picture.image.url(:table), class: "productimg" ) %>
+                          <% else %>
+                              <%=image_tag("default-placeholder.png", class: "productimg" ) %>
+                          <% end %>
                             <!-- TODO napravi da se prikazuje slika od tocno tog single_article-a, a ne od cijelokupnog artikla -->
                           <span class="item-price"><%  number_to_currency(i.single_article.article.cost, :unit => 'Kn', :format => "%n %u") %></span>
                           <span class="quantity"><%= i.amount %></span>
@@ -188,6 +194,8 @@
 
                               <% if sa.pictures.first != nil %>
                                   <%=image_tag(sa.pictures.first.image.url(:table), class: "productimg") %>
+                              <% elsif sa.article.picture != nil %>
+                                  <%=image_tag(sa.article.picture.image.url(:table), class: "productimg" ) %>
                               <% else %>
                                   <%=image_tag("default-placeholder.png", class: "productimg" ) %>
                               <% end %>

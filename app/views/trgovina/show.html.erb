@@ -81,6 +81,16 @@
                       </div>
                     <% end %>
 
+                    <% if @article.single_articles.first.type_name != "" && @article.single_articles.first.type_name != nil %>
+
+                        <div class="col-md-6">
+                  <div class="productboxcolor">Tip* </div>
+
+                      <%= f.input :type_name, label: false, collection: SingleArticle.where(" article_id = ? AND type_name IS NOT NULL", f.object.id ).pluck(:type_name), class: "ddboje",:include_blank => false  %>
+
+                      </div>
+                    <% end %>
+
                     <% if @article.single_articles.first.color != nil %>
 
                         <div class="col-md-6">

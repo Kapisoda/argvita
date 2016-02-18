@@ -95,6 +95,8 @@ class CartsArticlesController < ApplicationController
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
     end
 
+    puts "Usao sam u single!!!"
+
     art = Article.find_by(id: params[:article][:id])
 
     if art.on_discount != nil && art.on_discount == true
@@ -103,7 +105,7 @@ class CartsArticlesController < ApplicationController
       prize = art.cost
     end
 
-    if params[:article][:color] || params[:article][:size]
+    if params[:article][:color] || params[:article][:size] || params[:article][:type_name]
 
       puts "Usao sam u single_article carts_article"
 
@@ -118,6 +120,11 @@ class CartsArticlesController < ApplicationController
         puts "Usao sam u color"
 
         @sa = SingleArticle.find_by("article_id = ? AND color_id = ?", params[:article][:id], params[:article][:color])
+
+      elsif params[:article][:type_name]
+        puts "Usao sam u type_name"
+        @sa = SingleArticle.find_by(article_id: params[:article][:id],type_name: params[:article][:type_name])
+
       end
 
       puts "ID od single article-a je #{@sa.id}"
