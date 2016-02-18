@@ -23,12 +23,12 @@
 
 
 
-
+<%= form_for_filterrific @filterrific do |f| %>
 <div class="prdt">
   <div class="container">
     <div class="prdt-top">
       <div class="col-md-9 prdt-left">
-
+        <%= render_filterrific_spinner %>
         <%= render(
                 partial: 'trgovina/show_pics',
                 locals: { articles: @articles }
@@ -38,7 +38,7 @@
 
 
           <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-      <%= form_for_filterrific @filterrific do |f| %>
+
           <% f.select(
                   :with_material_id,
                   @filterrific.select_options[:with_material_id],
@@ -55,7 +55,7 @@
                             :search_query,
                             class: 'form-control filterrific-periodically-observed', placeholder: "pretraga proizvoda..."
                         ) %>
-                    <%= render_filterrific_spinner %>
+
                   </div>
                 </div>
               </section>

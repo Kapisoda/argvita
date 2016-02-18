@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3570e1cb-66e1-4168-a4bf-5011b685a224" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/articles_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/articles_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/articles/search_art.erb" afterPath="$PROJECT_DIR$/app/views/articles/search_art.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/trgovina/index_of.erb" afterPath="$PROJECT_DIR$/app/views/trgovina/index_of.erb" />
     </list>
     <ignored path="argvita.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,16 +35,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_cat_pics.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/trgovina/_cat_pics.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.6538463">
-              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="articles_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/articles_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -76,11 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search_art.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index_of.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/trgovina/index_of.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.17586207">
+              <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search_art.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/articles/search_art.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11724138">
-              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state vertical-scroll-proportion="-15.038462">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -196,7 +195,6 @@
         <option value="$PROJECT_DIR$/app/models/ssubcategory.rb" />
         <option value="$PROJECT_DIR$/app/controllers/trgovina_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/article.rb" />
-        <option value="$PROJECT_DIR$/app/views/trgovina/index_of.erb" />
         <option value="$PROJECT_DIR$/app/views/repromaterijal/index_of.erb" />
         <option value="$PROJECT_DIR$/app/controllers/shopping_carts_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/material.rb" />
@@ -214,6 +212,7 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/articles_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/articles/search_art.erb" />
+        <option value="$PROJECT_DIR$/app/views/trgovina/index_of.erb" />
       </list>
     </option>
   </component>
@@ -1093,7 +1092,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455810461534</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Napravljeno da kada u search nije nista upisano da nista ne nalazi">
+      <created>1455810970970</created>
+      <option name="number" value="00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1455810970970</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1164,7 +1169,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="filterrific napravljen" />
     <MESSAGE value="napravljen show za usera u kojem korisnik moze pogledati svoje informacije i preko kojeg korisnik moze editirati svoj account" />
     <MESSAGE value="napravljen filter i page za pretragu repromaterijala  (subcategory i ssubcategory)" />
     <MESSAGE value="napravljen shoping cart i carts article controleri, prepravljeni modeli" />
@@ -1189,7 +1193,8 @@
     <MESSAGE value="maknut banner sa kategorija(trgovina i repromaterijal)" />
     <MESSAGE value="Dodani prikaz tipova i dodavanje tipova(single article) u kosaricu, ispravljena greska ne pokazivanja slika od single_article ako ne postoji slika unutar single_article(prikazuje avatar artikla)" />
     <MESSAGE value="Dodan search nad cijelom stranicom" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan search nad cijelom stranicom" />
+    <MESSAGE value="Napravljeno da kada u search nije nista upisano da nista ne nalazi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Napravljeno da kada u search nije nista upisano da nista ne nalazi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1348,14 +1353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/trgovina/index_of.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1578,8 +1575,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/articles/search_art.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11724138">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        <state vertical-scroll-proportion="-15.038462">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/trgovina/index_of.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17586207">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
           <folding />
         </state>
       </provider>
