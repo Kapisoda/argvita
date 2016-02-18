@@ -2,7 +2,7 @@
   <div class="container">
     <div class="prdt-top">
       <div class="col-md-9 prdt-left">
-<% if @articles.empty? %>
+<% if  @articles.nil? || @articles.empty? %>
   <h2>Nema traženog artikla...</h2>
 <% else %>
 <% @articles.each do |art| %>

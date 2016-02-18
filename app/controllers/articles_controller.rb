@@ -35,12 +35,16 @@ class ArticlesController < ApplicationController
 
     end
 
+
     terms = params[:article][:title].to_s.downcase
 
-
-    @articles = Article.where(
-        "(articles.for_sale = true AND LOWER(articles.title) LIKE ? OR LOWER(articles.title_eng) LIKE ? OR LOWER(articles.code) LIKE ?)", "%#{terms}%", "%#{terms}%", "%#{terms}%"
-    )
+    if params[:article][:title] == "" || params[:article][:title] == nil
+      @articles = nil
+    else
+      @articles = Article.where(
+          "(articles.for_sale = true AND LOWER(articles.title) LIKE ? OR LOWER(articles.title_eng) LIKE ? OR LOWER(articles.code) LIKE ?)", "%#{terms}%", "%#{terms}%", "%#{terms}%"
+      )
+    end
   end
 
   def index_subcategories
