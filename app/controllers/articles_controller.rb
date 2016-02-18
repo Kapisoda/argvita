@@ -24,7 +24,24 @@ class ArticlesController < ApplicationController
   end
 
 
+  def search_art
+    if current_user == nil
+      @no_articles = Article.where(id: $no_user_articles.keys)
+      @sa = SingleArticle.where(id: $no_user_single_articles.keys)
 
+    else
+      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
+
+    end
+
+    terms = params[:article][:title].to_s.downcase
+
+
+    @articles = Article.where(
+        "(articles.for_sale = true AND LOWER(articles.title) LIKE ? OR LOWER(articles.title_eng) LIKE ? OR LOWER(articles.code) LIKE ?)", "%#{terms}%", "%#{terms}%", "%#{terms}%"
+    )
+  end
 
   def index_subcategories
     @page_title = "Artikli"

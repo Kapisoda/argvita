@@ -93,7 +93,11 @@ Rails.application.routes.draw do
 
   get 'repromaterijal/index_of' => "repromaterijal#index_of", :as => 'index_of_repro'
 
-  resources :articles
+  get 'articles/search_art' => "articles#search_art", :as => 'search_art'
+
+  resources :articles do
+    put :search_art, on: :collection
+  end
   resources :categories
   resources :clients
   resources :subcategories

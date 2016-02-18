@@ -288,18 +288,16 @@
         </div>
         <div class="clearfix"> </div>
       </div>
-      <!-- <div class="col-md-3 header-right">
-         <div class="search-bar">
-
-
-           <!--search
-
-
-
-
-          <input type="submit" value="">
+      <div class="col-md-3 header-right">
+        <%= simple_form_for Article.new, url: search_art_articles_path, :method => :put do |f| %>
+        <div class="search-bar">
+          <%= f.input :title, label: false, placeholder: 'pretraga svih artikla...' %>
+          <!--<input type="text" value="pretraga" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'pretraga';}">-->
+          <!--<input type="submit" value="">-->
+          <%= f.button :submit, "" %>
         </div>
-      </div>-->
+        <% end %>
+      </div>
       <div class="clearfix"> </div>
     </div>
   </div>
