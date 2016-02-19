@@ -216,7 +216,39 @@ class ShoppingCartsController < ApplicationController
   end
 
 
+  def destroy_complement
+    @single_article = Complement.find(params[:format])
+    @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, complement_id: params[:format] )
 
+    puts "usao sam u destroy single"
+
+
+    if @carts_article.amount > 1
+      @carts_article.amount -= 1
+      @carts_article.save
+      if @single_article.on_discount.nil? || @single_article.on_discount == false || @single_article.discount != 0
+        @shopping_cart.current_cost -= @single_article.cost
+        @shopping_cart.save
+      else
+        @shopping_cart.current_cost -= (@single_article.cost- (@single_article.cost*@single_article.discount/100))
+        @shopping_cart.save
+      end
+    else
+      if @single_article.on_discount.nil? || @single_article.on_discount == false || @single_article.discount != 0
+        @shopping_cart.current_cost -= @single_article.cost
+        @shopping_cart.save
+      else
+        @shopping_cart.current_cost -= (@single_article.cost- (@single_article.cost*@single_article.discount/100))
+        @shopping_cart.save
+      end
+      @carts_article.destroy!
+    end
+
+
+
+    redirect_to :back
+  end
 
 
 

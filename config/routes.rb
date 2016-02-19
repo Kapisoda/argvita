@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
 
+  get 'complements/index'
+
+  get 'complements/show'
+
+  get 'complements/new'
+
+  get 'complements/create'
+
+  get 'complements/edit'
+
+  get 'complements/update'
+
+  get 'complements/destroy'
+
   get 'repromaterijal/index'
 
   get 'repromaterijal/show'
@@ -98,18 +112,21 @@ Rails.application.routes.draw do
   resources :articles do
     put :search_art, on: :collection
   end
+  resources :complements
   resources :categories
   resources :clients
   resources :subcategories
   resources :ssubcategories
   resources :shopping_carts do
     put :destroy_single, on: :collection
+    put :destroy_complement, on: :collection
   end
   resources :carts_articles do
     put :single, on: :collection
     put :create_single, on: :collection
     put :plus_no_user, on: :collection
     put :min_no_user, on: :collection
+    put :create_complement, on: :collection
 
   end
   resources :trgovina do

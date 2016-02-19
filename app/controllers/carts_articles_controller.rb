@@ -97,15 +97,38 @@ class CartsArticlesController < ApplicationController
 
     puts "Usao sam u single!!!"
 
-    art = Article.find_by(id: params[:article][:id])
+    if params[:article]
+      art = Article.find_by(id: params[:article][:id])
 
-    if art.on_discount != nil && art.on_discount == true
-      prize = (art.cost- (art.cost*art.discount/100))
-    else
-      prize = art.cost
+      if art.on_discount != nil && art.on_discount == true
+        prize = (art.cost- (art.cost*art.discount/100))
+      else
+        prize = art.cost
+      end
+    elsif params[:complement][:id]
+      art = Complement.find_by(id: params[:complement][:id])
+
+      if art.on_discount != nil && art.on_discount == true
+        prize = (art.cost- (art.cost*art.discount/100))
+      else
+        prize = art.cost
+      end
     end
 
-    if params[:article][:color] || params[:article][:size] || params[:article][:type_name]
+    if params[:complement]
+
+      @cart_complement = CartsArticle.find_by(complement_id: params[:complement][:id], shopping_cart_id: @shopping_cart.id)
+
+      #puts "Komplet #{complement.complement.nil? ? "DA NULL JE" : "NIJE NULL"}"
+
+      if @cart_complement != nil
+        @cart_complement.amount += params[:complement][:amount].to_i
+        @cart_complement.save
+      else
+       CartsArticle.create(complement_id: params[:complement][:id], shopping_cart_id: @shopping_cart.id, amount: params[:complement][:amount])
+      end
+
+    elsif params[:article][:color] || params[:article][:size] || params[:article][:type_name]
 
       puts "Usao sam u single_article carts_article"
 
@@ -130,13 +153,31 @@ class CartsArticlesController < ApplicationController
       puts "ID od single article-a je #{@sa.id}"
 
       if current_user != nil
-      CartsArticle.create(single_article_id: @sa.id, shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount])
+        @cart_single = CartsArticle.find_by(single_article_id: @sa.id, shopping_cart_id: @shopping_cart.id)
+
+        #puts "Komplet #{complement.complement.nil? ? "DA NULL JE" : "NIJE NULL"}"
+
+        if @cart_single != nil
+          @cart_single.amount += params[:article][:amount].to_i
+          @cart_single.save
+        else
+          CartsArticle.create(single_article_id: @sa.id, shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount])
+        end
       end
 
     else
 
       if current_user != nil
-      CartsArticle.create(article_id: params[:article][:id], shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount] )
+        @cart_single = CartsArticle.find_by(article_id: params[:article][:id], shopping_cart_id: @shopping_cart.id)
+
+        #puts "Komplet #{complement.complement.nil? ? "DA NULL JE" : "NIJE NULL"}"
+
+        if @cart_single != nil
+          @cart_single.amount += params[:article][:amount].to_i
+          @cart_single.save
+        else
+          CartsArticle.create(article_id: params[:article][:id], shopping_cart_id: @shopping_cart.id, amount: params[:article][:amount] )
+        end
       end
     end
 
@@ -250,6 +291,69 @@ class CartsArticlesController < ApplicationController
 
   end
 
+
+  def create_complement
+    puts "USAO SAM U CREATE COMPLEMENT"
+
+    @complement = Complement.find(params[:format])
+
+    if current_user != nil  # kad ima usera #############################################################################################
+
+      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+
+      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, complement_id: params[:format] )
+
+
+        @carts_article.increment!(:amount)
+
+
+    else  #kad nema usera   ################################################################################################################
+
+
+      if $no_user_articles.has_key?(@complement.id.to_s)
+        $no_user_articles.each do |k, v|
+          if k == @article.id.to_s
+            $no_user_articles[k] += 1
+          end
+        end
+      else
+        $no_user_articles[params[:format]] = 1
+      end
+
+
+    end  ###################################################################################################################################
+
+    if @complement.on_discount.nil? || @complement.on_discount == false || @complement.discount != 0
+      if current_user == nil
+
+        $items_cost += @complement.cost
+
+      end
+
+      if current_user != nil
+          @shopping_cart.current_cost += @complement.cost
+          @shopping_cart.save
+
+      end
+
+
+    else
+      if current_user == nil
+
+        $items_cost += (@complement.cost- (@complement.cost*@complement.discount/100))
+
+      end
+      @shopping_cart.current_cost += (@complement.cost- (@complement.cost*@complement.discount/100))
+      @shopping_cart.save
+    end
+
+
+
+
+
+    redirect_to shopping_carts_show_path
+
+  end
 
 
   def plus_no_user

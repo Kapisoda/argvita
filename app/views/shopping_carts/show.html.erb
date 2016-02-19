@@ -91,7 +91,7 @@
 
 
 
-    <% else %>
+    <% elsif !a.single_article.nil? %>
 
 
 
@@ -135,6 +135,52 @@
           <div class="col-xs-6 col-md-2" style="text-align: right;">
             <div class="item-price"><%if !a.single_article.article.on_discount.nil? && !a.single_article.article.on_discount? && a.single_article.article.discount != 0 %> <%=  number_to_currency((a.single_article.article.cost-(a.single_article.article.cost*a.single_article.article.discount/100))*a.amount, :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.single_article.article.cost*a.amount, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
           </div>
+
+    <% else %>
+
+
+          <div class="col-xs-6 col-md-1" >
+            <% if a.complement.picture != nil %>
+                <%= image_tag(a.complement.picture.image.url(:table)) %>
+            <% else %>
+                <%=image_tag("default-placeholder-2.png", class: "productimg" ) %>
+            <% end %>
+
+
+
+          </div>
+
+          <div class="col-xs-6 col-md-3" >
+            <div class="item-title"> <%=  a.complement.title  %> </div>
+          </div>
+
+          <div class="col-xs-6 col-md-4">
+            <div class="col-xs-6 col-md-1" style="width: auto; height: auto;">
+              <%= link_to '-', destroy_complement_shopping_carts_path(a.complement.id ), :method => :put, class: "btn btn-default" %>
+            </div>
+
+            <div class="col-xs-6 col-md-2" style="width: auto; height:auto;">
+              <div class="item-title"> <%=  a.amount %></div>
+            </div>
+
+            <div class="col-xs-6 col-md-2" style="width: auto; height: auto;">
+
+              <%= link_to '+', create_complement_carts_articles_path(a.complement.id ), :method => :put, class: "btn btn-default " %>
+
+
+            </div>
+          </div>
+
+
+          <div class="col-xs-6 col-md-2">
+            <div class="item-price" style="text-align: right;"><%if !a.complement.on_discount.nil? && !a.complement.on_discount? && a.complement.discount != 0 %> <%=  number_to_currency((a.complement.cost-(a.complement.cost*a.complement.discount/100)), :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.complement.cost, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+          </div>
+
+          <div class="col-xs-6 col-md-2" style="text-align: right;">
+            <div class="item-price"><%if !a.complement.on_discount.nil? && !a.complement.on_discount? && a.complement.discount != 0 %> <%=  number_to_currency((a.complement.cost-(a.complement.cost*a.single_article.article.discount/100))*a.amount, :unit => 'Kn', :format => "%n %u")  %> <% else %> <%=  number_to_currency(a.complement.cost*a.amount, :unit => 'Kn', :format => "%n %u")  %> <% end %></div>
+          </div>
+
+
     <% end %>
     </div>
       </li>
