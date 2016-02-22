@@ -6,6 +6,9 @@ class Article < ActiveRecord::Base
   has_many :article_categories
   has_many :categories, :through => :article_categories
 
+  has_many :related_articles
+  has_many :related_articles, :through => :related_articles
+
   belongs_to :material
   belongs_to :subcategory
   belongs_to :ssubcategory

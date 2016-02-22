@@ -131,6 +131,13 @@ class RepromaterijalController < ApplicationController
   def show
     @article = Article.find(params[:format])
 
+    rel_art_ids = []
+    @rel_arts = []
+
+    rel_art_ids = RelatedArticle.where(article_id: @article.id).pluck(:related_article_id)
+
+    @rel_arts = Article.where(id: rel_art_ids)
+
     if current_user != nil
       @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 

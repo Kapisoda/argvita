@@ -63,6 +63,15 @@
               <div class="productboxopis-site">
                 <p><%= @article.description %></p>
               </div>
+              <div class="productboxopis-site">
+                <% if !@article.weight.nil? %>
+                  <p><strong>Težina:</strong> <%= @article.weight %>g </p>
+                <% end %>
+
+                <% if !@article.dimension.nil? %>
+                  <p><strong>Dimenzije:</strong> <%= @article.dimension %></p>
+                <% end %>
+              </div>
 
               <%= simple_form_for @article, url: single_carts_articles_path, :method => :put, html: {class: ""} do |f| %>
 
@@ -132,6 +141,73 @@
       <div class="clearfix"> </div>
     </div>
   </div>
-</div>
+
               <% end %>
+              <% if  !@rel_arts.nil? && !@rel_arts.empty? %>
+              <div class="page-header" style="padding-left: 25px; margin: 0;">
+                <h1>Srodni Artikli</h1>
+              </div>
+
+                <div class="row" >
+                  <div class="prdt-top">
+                    <div class="col-md-12 prdt-left">
+                          <% @rel_arts.each do |art| %>
+
+                              <% if art.raw == true %>
+                                  <div class="product-one col-md-3 product-left ">
+                                    <div class="product-main simpleCart_shelfItem">
+                                      <!--TODO: upisati naziv slike-->
+
+                                      <% if art.picture != nil %>
+                                          <%=link_to  repromaterijal_show_path(art.id)  do %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img" ) %> <% end %>
+                                      <% else %>
+                                          <%=link_to  repromaterijal_show_path(art.id)  do %> <%= image_tag("placeholder_index.png", class: "img-responsive zoom-img" ) %> <% end %>
+                                      <% end %>
+                                      <div class="product-bottom">
+                                        <h3><%= art.title %></h3>
+                                        <!--NOTE: kratki opis od jednog reda-->
+                                        <p>detalji</p>
+
+                                        <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
+
+                                      </div>
+                                      <% if art.on_discount == true && art.discount != 0 %>
+                                          <div class="srch">
+                                            <span><%= art.discount %>%</span>
+                                          </div>
+                                      <% end %>
+                                    </div>
+                                  </div>
+                              <% else %>
+                                  <div class="product-one col-md-3 product-left ">
+                                    <div class="product-main simpleCart_shelfItem">
+                                      <!--TODO: upisati naziv slike-->
+                                      <%=link_to  trgovina_show_path(art.id)  do %> <% if !art.picture.nil? %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img") %><% else %> <%= image_tag('placeholder_index.png', class: "img-responsive zoom-img") %> <% end %> <% end %>
+                                      <div class="product-bottom">
+                                        <h3><%= art.title %></h3>
+                                        <!--NOTE: kratki opis od jednog reda-->
+                                        <p>detalji</p>
+
+                                        <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
+
+                                      </div>
+                                      <% if art.on_discount == true && art.discount != 0 %>
+                                          <div class="srch">
+                                            <span><%= art.discount %>%</span>
+                                          </div>
+                                      <% end %>
+                                    </div>
+                                  </div>
+                              <% end %>
+
+                              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+
+                          <% end %>
+                      <% end %>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+
+              </div>
 <!--end-single-->

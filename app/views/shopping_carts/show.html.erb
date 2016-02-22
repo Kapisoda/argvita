@@ -191,7 +191,10 @@
     <div class="item-title" style="text-align: right;">Ukupna cijena izabranih proizvoda je:</div>
 
     <% if current_user != nil %>
-        <div class="item-price"  style="text-align: right;"><%= number_to_currency(@shopping_cart.current_cost, :unit => 'Kn', :format => "%n %u") %></div>
+        <div style="text-align: right"><p>Bez PDV-a: <%= number_to_currency(@cijena_bez_pdv = (@shopping_cart.current_cost-(@shopping_cart.current_cost*0.2)), :unit => 'Kn', :format => "%n %u") %></p></div>
+        <div style="text-align: right"><p>PDV: <%= number_to_currency(@shopping_cart.current_cost - @cijena_bez_pdv, :unit => 'Kn', :format => "%n %u") %> </p></div>
+
+        <div class="item-price"  style="text-align: right; font-size: 200%;"><hr><%= number_to_currency(@shopping_cart.current_cost, :unit => 'Kn', :format => "%n %u") %></div>
         </br>
     <% end %>
         </div>
