@@ -6,17 +6,13 @@
 <div class="bnr" id="home">
   <div id="top" class="callbacks_container">
     <ul class="rslides" id="slider4">
-      <li>
-        <%=image_tag("ban2.jpg") %>
-           </li>
-           <li>
-             <%=image_tag("ban1.jpg") %>
-                </li>
-                <li>
-                  <%=image_tag("ban3.jpg") %>
-                </li>
-            </ul>
-        </div>
+      <% HomeBanner.where(active: true).each do |bann| %>
+        <li>
+          <%=image_tag(bann.image.url(:bann)) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
         <div class="clearfix"> </div>
 </div>
 <!--banner-ends-->

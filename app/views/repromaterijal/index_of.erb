@@ -1,15 +1,11 @@
 <div class="bnr" id="home">
   <div id="top" class="callbacks_container">
     <ul class="rslides" id="slider4">
-      <li>
-        <%=image_tag('15.png') %>
-      </li>
-      <li>
-        <%=image_tag('14.jpg') %>
-      </li>
-      <li>
-        <%=image_tag('13.jpg') %>
-      </li>
+      <% ShopBanner.where(active: true).each do |bann| %>
+          <li>
+            <%=image_tag(bann.image.url(:bann)) %>
+          </li>
+      <% end %>
     </ul>
   </div>
   <div class="clearfix"> </div>
