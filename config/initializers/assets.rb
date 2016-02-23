@@ -49,6 +49,8 @@ Rails.application.config.assets.precompile += %w( responsiveslides.min.js )
 Rails.application.config.assets.precompile += %w( simpleCart.min.js )
 Rails.application.config.assets.precompile += %w( sky-forms-ie8.js )
 Rails.application.config.assets.precompile += %w( sliderfunction.js )
+Rails.application.config.assets.precompile += %w( jquery.countdown.js)
+Rails.application.config.assets.precompile += %w( jquery.countdown.min.js )
 
 Rails.application.config.assets.precompile += %w( 11.png )
 Rails.application.config.assets.precompile += %w( 100.png )

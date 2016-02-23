@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'auctions/index'
+
+  get 'auctions/show'
+
   get 'complements/index'
 
   get 'complements/show'
@@ -109,6 +113,12 @@ Rails.application.routes.draw do
 
   get 'articles/search_art' => "articles#search_art", :as => 'search_art'
 
+  get 'auctions/complement_show' => "auctions#complement_show", :as => 'complement_show'
+
+  resources :auctions do
+    put :new_bid, on: :collection
+    put :complement_show, on: :collection
+  end
   resources :articles do
     put :search_art, on: :collection
   end
