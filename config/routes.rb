@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'purchases/create'
+
   get 'auctions/index'
 
   get 'auctions/show'
@@ -115,6 +117,7 @@ Rails.application.routes.draw do
 
   get 'auctions/complement_show' => "auctions#complement_show", :as => 'complement_show'
 
+  resources :purchases
   resources :auctions do
     put :new_bid, on: :collection
     put :complement_show, on: :collection
