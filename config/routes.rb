@@ -133,7 +133,7 @@ Rails.application.routes.draw do
   end
   resources :carts_articles do
     put :single, on: :collection
-    put :create_single, on: :collection
+    post :create_single, on: :collection
     put :plus_no_user, on: :collection
     put :min_no_user, on: :collection
     put :create_complement, on: :collection

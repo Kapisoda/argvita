@@ -1,5 +1,5 @@
 class AuctionsController < ApplicationController
-  before_action :authenticate_user!
+
 
   def index
     if current_user != nil
@@ -56,6 +56,7 @@ class AuctionsController < ApplicationController
 
   def new_bid
 
+    if current_user != nil
     auction = Auction.find(params[:auction][:id])
 
 
@@ -72,6 +73,12 @@ class AuctionsController < ApplicationController
     else
 
       flash[:error] = "Ponuda mora biti veća od trenutne!"
+
+    end
+
+    else
+
+      flash[:error] = "Morate biti ulogirani da bi licitirali!"
 
     end
 

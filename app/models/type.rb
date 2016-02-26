@@ -1,5 +1,4 @@
-class Color < ActiveRecord::Base
-  has_many :single_articles
+class Type < ActiveRecord::Base
   has_many :articles
 
   def self.options_for_select

@@ -65,7 +65,39 @@
                 </div>
               </section>
 
+              <% @mat = Subcategory.find($subcategory_id) %>
 
+              <% if @mat.has_colors == true %>
+                  <section class="sky-form">
+                    <h4>Boje</h4>
+                    <div class="row1 scroll-pane">
+
+                      <div class="col col-4">
+                        <% Color.all.each do |a| %>
+                            <label class="checkbox">
+                              <%= f.check_box(:with_color_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </section>
+              <% end %>
+
+              <% if @mat.has_types == true %>
+                  <section class="sky-form">
+                    <h4>Tipovi</h4>
+                    <div class="row1 scroll-pane">
+
+                      <div class="col col-4">
+                        <% Type.all.each do |a| %>
+                            <label class="checkbox">
+                              <%= f.check_box(:with_type_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </section>
+              <% end %>
               <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
 
 

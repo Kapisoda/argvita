@@ -13,6 +13,9 @@ class Article < ActiveRecord::Base
   belongs_to :subcategory
   belongs_to :ssubcategory
 
+  belongs_to :color
+  belongs_to :type
+
   has_many :past_purchases
   has_many :users, :through => :past_purchases
 
@@ -60,7 +63,9 @@ class Article < ActiveRecord::Base
           :min_cost,
           :max_cost,
           :with_subcategory_id,
-          :with_ssubcategory_id
+          :with_ssubcategory_id,
+          :with_color_id,
+          :with_type_id
       ]
   )
 
@@ -109,6 +114,13 @@ class Article < ActiveRecord::Base
   }
 
 
+  scope :with_color_id, lambda { |color_ids|
+    where(color_id: [*color_ids])
+  }
+
+  scope :with_type_id, lambda { |type_ids|
+    where(type_id: [*type_ids])
+  }
 
 # scopovi za podkategorije i podpodkategorije
   scope :with_subcategory_id, lambda { |subcategory_ids|
@@ -182,10 +194,9 @@ class Article < ActiveRecord::Base
         ['Cijeni (od najmanje)', 'cost_asc'],
         ['Cijeni (od najvise)', 'cost_desc'],
         ['Nazivu (a-z)', 'title_asc'],
-        ['Datumu kreiranja (najnoviji)', 'created_at_desc'],
-        ['Datumu kreiranja (stariji)', 'created_at_asc'],
-        ['Datumu izmjene (najnoviji)', 'updated_at_desc'],
-        ['Datumu izmjene (stariji)', 'updated_at_asc']
+        ['Novi proizvodi prvi', 'created_at_desc'],
+        ['Stari proizvodi prvi', 'created_at_asc']
+
     ]
   end
 end

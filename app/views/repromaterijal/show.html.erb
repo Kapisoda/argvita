@@ -75,7 +75,7 @@
                 <% end %>
               </div>
 
-              <%= simple_form_for @article, url: single_carts_articles_path, :method => :put, html: {class: ""} do |f| %>
+              <%= simple_form_for @article, url:  @article.single_articles.first != nil ?  create_single_carts_articles_path : carts_articles_path, :method => :post, html: {class: ""} do |f| %>
 
                   <%= f.input :id, :as => :hidden %>
 
@@ -92,7 +92,7 @@
                             </div>
                         <% end %>
 
-                        <% if @article.single_articles.first.type_name != "" && @article.single_articles.first.type_name != nil %>
+<!--                        <% if @article.single_articles.first.type_name != "" && @article.single_articles.first.type_name != nil %>
 
                             <div class="col-md-6">
                               <div class="productboxcolor">Tip* </div>
@@ -110,7 +110,7 @@
                               <%= f.input :color, label: false , collection: Color.where(id: SingleArticle.where(article_id: f.object.id).pluck(:color_id)),:include_blank => false %>
 
                             </div>
-                        <% end %>
+                        <% end %>-->
 
                         <div class="col-md-6"></div>
 
@@ -212,4 +212,5 @@
               </div>
               </div>
               </div>
+</div>
               <!--end-single-->

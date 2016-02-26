@@ -59,8 +59,9 @@ class RepromaterijalController < ApplicationController
     @page_title = "Artikli"
     @filterrific = initialize_filterrific(Article.where(raw: true, for_sale: true, subcategory_id: $subcategory_id ), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
                                                                                                                                                               with_subcategory_id: Subcategory.options_for_select,
-                                                                                                                                                              with_ssubcategory_id: Ssubcategory.options_for_select}) or return
-
+                                                                                                                                                              with_ssubcategory_id: Ssubcategory.options_for_select,
+                                                                                                                                                              with_color_id: Color.options_for_select,
+                                                                                                                                                              with_type_id: Type.options_for_select}) or return
 
 
     @articles = @filterrific.find.page(params[:page])

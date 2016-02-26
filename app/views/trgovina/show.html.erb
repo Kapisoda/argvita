@@ -68,12 +68,12 @@
                   <p><strong>Težina:</strong> <%= @article.weight %>g </p>
                 <% end %>
 
-                <% if !@article.dimension.nil? %>
+                <% if !@article.dimension.nil? && @article.dimension != "" %>
                   <p><strong>Dimenzije:</strong> <%= @article.dimension %></p>
                 <% end %>
               </div>
 
-              <%= simple_form_for @article, url: single_carts_articles_path, :method => :put, html: {class: ""} do |f| %>
+              <%= simple_form_for @article, url: @article.single_articles.first != nil ?  create_single_carts_articles_path : carts_articles_path, :method => :post, html: {class: ""} do |f| %>
 
                 <%= f.input :id, :as => :hidden %>
 
@@ -88,26 +88,6 @@
                       <%= f.input :size, label: false, collection: SingleArticle.where(article_id: f.object.id).pluck(:size), class: "ddboje",:include_blank => false  %>
 
                       </div>
-                    <% end %>
-
-                    <% if @article.single_articles.first.type_name != "" && @article.single_articles.first.type_name != nil %>
-
-                        <div class="col-md-6">
-                  <div class="productboxcolor">Tip* </div>
-
-                      <%= f.input :type_name, label: false, collection: SingleArticle.where(" article_id = ? AND type_name IS NOT NULL", f.object.id ).pluck(:type_name), class: "ddboje",:include_blank => false  %>
-
-                      </div>
-                    <% end %>
-
-                    <% if @article.single_articles.first.color != nil %>
-
-                        <div class="col-md-6">
-                          <div class="productboxcolor">Boja* </div>
-
-                          <%= f.input :color, label: false , collection: Color.where(id: SingleArticle.where(article_id: f.object.id).pluck(:color_id)),:include_blank => false %>
-
-                        </div>
                     <% end %>
 
                 <div class="col-md-6"></div>
@@ -140,7 +120,8 @@
       </div>
       <div class="clearfix"> </div>
     </div>
-  </div>
+</div>
+
 
               <% end %>
               <% if  !@rel_arts.nil? && !@rel_arts.empty? %>
@@ -210,4 +191,6 @@
                 </div>
 
               </div>
+              </div>
+
 <!--end-single-->

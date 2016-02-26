@@ -14,12 +14,16 @@ class CartsArticlesController < ApplicationController
 
 
   def create
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
 
-    @article = Article.find(params[:format])
+    art_id = params[:format] ? params[:format] : params[:article][:id]
+
+    @article = Article.find(art_id)
 
     if current_user == nil  # kad nema usera #############################################################################################
-
-
 
 
       puts "Ispred if za provjeru jel se artikl nalazi u hash-u"
@@ -32,9 +36,10 @@ class CartsArticlesController < ApplicationController
         end
       else
         puts "Unutar if-else-a kada nije pronaden artikl unutar hash-a"
-        $no_user_articles[params[:format]] = 1
+        $no_user_articles[art_id] = 1
 
       end
+
 
 
 
@@ -42,19 +47,19 @@ class CartsArticlesController < ApplicationController
 
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
-    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
 
 
       if @carts_article == nil
-        CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: params[:format], amount: 1 )
-        @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: params[:format] )
+        CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: art_id, amount: params[:article] ? params[:article][:amount] : 1 )
+        @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
       elsif @carts_article.amount < @article.amount
-        @carts_article.increment!(:amount)
+
+        @carts_article.amount += params[:article] ? params[:article][:amount] : 1
+        @carts_article.save
       end
 
     end
-
-
 
 
     if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
@@ -66,6 +71,7 @@ class CartsArticlesController < ApplicationController
 
       if current_user != nil
         if @carts_article.amount < @article.amount
+          # @article.amount-=1                                         #smanjivanje amounta u bazi ###################################################
            @shopping_cart.current_cost += @article.cost
            @shopping_cart.save
         else
@@ -90,6 +96,12 @@ class CartsArticlesController < ApplicationController
   end
 
   def single
+
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
+
 
     if current_user != nil  #kad ima usera #############################################################################################################################
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
@@ -220,24 +232,47 @@ class CartsArticlesController < ApplicationController
 
 
   def create_single
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
 
     puts "USAO SAM U CREATE SINGLE"
 
-    @single_article = SingleArticle.find(params[:format])
+    @single_article = SingleArticle.find_by(article_id: params[:article][:id], size: params[:article][:size])
 
 
-    if current_user != nil  # kad ima usera #############################################################################################
+
+
+  # kad ima usera #############################################################################################
+
 
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
-    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:format] )
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:article][:id] )
 
-    if @carts_article.amount < @single_article.amount
-      @carts_article.increment!(:amount)
+    if @carts_article == nil
+      if @single_article.amount >= params[:article][:amount].to_i
+
+        CartsArticle.create(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id, amount: params[:article][:amount])
+
+      end
+
+    else
+
+    if @carts_article.amount <= @single_article.amount
+      @carts_article.amount += params[:article][:amount]
+
+    else
+
+    flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+    return redirect_to :back
+
     end
+  end
+  #kad nema usera   ################################################################################################################
 
-    else  #kad nema usera   ################################################################################################################
-
+=begin
 
       if $no_user_articles.has_key?(@single_article.id.to_s)
         $no_user_articles.each do |k, v|
@@ -249,10 +284,15 @@ class CartsArticlesController < ApplicationController
         $no_user_articles[params[:format]] = 1
       end
 
+=end
+
+
+    @shopping_cart.current_cost += @single_article.article.cost
+    @shopping_cart.save
 
 
 
-    end  ###################################################################################################################################
+  ###################################################################################################################################
 
     if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
       if current_user == nil
@@ -261,15 +301,7 @@ class CartsArticlesController < ApplicationController
 
       end
 
-      if current_user != nil
-        if @carts_article.amount < @single_article.article.amount
-          @shopping_cart.current_cost += @single_article.article.cost
-          @shopping_cart.save
-        else
-          flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
 
-        end
-      end
 
 
     else
@@ -278,6 +310,7 @@ class CartsArticlesController < ApplicationController
         $items_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
 
       end
+
       @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
       @shopping_cart.save
     end
@@ -286,13 +319,21 @@ class CartsArticlesController < ApplicationController
 
 
 
-    redirect_to shopping_carts_show_path
+    redirect_to :back
 
 
   end
 
 
   def create_complement
+
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
+
+
+
     puts "USAO SAM U CREATE COMPLEMENT"
 
     @complement = Complement.find(params[:format])
@@ -358,6 +399,12 @@ class CartsArticlesController < ApplicationController
 
   def plus_no_user
 
+
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
+
     @no_articles = Article.where(id: $no_user_articles.keys)
     @sa = SingleArticle.where(id: $no_user_single_articles.keys)
 
@@ -389,6 +436,10 @@ class CartsArticlesController < ApplicationController
   end
 
   def min_no_user
+    if current_user == nil
+      flash[:error] = "Morate biti ulogirani da bi stavljali artikle u kosaricu!"
+      return redirect_to :back
+    end
 
     @articles = Article.where(id: $no_user_articles.keys)
     @sa = SingleArticle.where(id: $no_user_single_articles.keys)

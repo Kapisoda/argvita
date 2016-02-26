@@ -59,7 +59,9 @@ class TrgovinaController < ApplicationController
     @page_title = "Artikli"
     @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true, material_id: $material_id ), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
                                                                                                                                                        with_category_id: Category.options_for_select,
-                                                                                                                                                       with_material_id: Material.options_for_select}) or return
+                                                                                                                                                       with_material_id: Material.options_for_select,
+                                                                                                                                                         with_color_id: Color.options_for_select,
+                                                                                                                                                         with_type_id: Type.options_for_select}) or return
 
 
 

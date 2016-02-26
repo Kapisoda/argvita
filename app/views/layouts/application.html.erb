@@ -112,23 +112,6 @@
                           <%= link_to 'remove', destroy_single_shopping_carts_path(i.single_article.id), :method => :put, class: "quantity" %>
                         </li>
 
-                    <% else %>
-
-                        <li class="clearfix">
-                          <%= link_to i.complement.title, complements_show_path(id: i.complement.id), class: "item-title" %>
-                          <br/>
-                          <% if i.complement.pictures.first != nil %>
-                              <%=image_tag(i.complement.pictures.first.image.url(:table), class: "productimg") %>
-                          <% elsif i.complement.article.picture != nil %>
-                              <%=image_tag(i.complement.article.picture.image.url(:table), class: "productimg" ) %>
-                          <% else %>
-                              <%=image_tag("default-placeholder.png", class: "productimg" ) %>
-                          <% end %>
-                          <!-- TODO napravi da se prikazuje slika od tocno tog single_article-a, a ne od cijelokupnog artikla -->
-                          <span class="item-price"><%=  number_to_currency(i.complement.cost, :unit => 'Kn', :format => "%n %u") %></span>
-                          <span class="quantity"><%= i.amount %></span>
-                          <%= link_to 'remove', destroy_complement_shopping_carts_path(i.complement.id), :method => :put, class: "quantity" %>
-                        </li>
 
 
                   <% end %>
@@ -297,16 +280,9 @@
             <li class="<%= params[:controller]== 'repromaterijal' && params[:action] == 'categories' ? 'active' : '' %>"> <%= link_to 'Repromaterijal', categories_repro_path, :method => :get %>
 
             </li>
-            <li class="<%= params[:controller]== 'complements' ? 'active' : '' %>"> <%= link_to 'Kompleti', complements_index_path, :method => :get %>
-
-
-            </li>
-            <% if current_user != nil %>
             <li class="<%= params[:controller]== 'auctions' ? 'active' : '' %>"> <%= link_to 'Aukcije', auctions_index_path, :method => :get %>
-
-
             </li>
-            <% end %>
+
             <li class="grid"><a href="typo.html">O nama</a>
             </li>
             <li class="grid"><a href="contact.html">Kontakt</a>
@@ -340,107 +316,7 @@
 <!--product-dialog-box-starts-->
 <!--TODO: cijeli div možeš staviti kao pratial-->
 
-<div id="boxes">
 
-  <div id="dialog" class="window">
-
-    <a href="#" class="close">X</a>
-
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <div class="dialog-srch srch">20%</div>
-        <!--TODO: postotak na modal dialogu-->
-        <div id="modal-photo" class="owl-carousel shadow">
-
-          <div class="item"><%=image_tag("362.png", class: "Product_photo" ) %></div>
-          <div class="item"><%=image_tag("362.png", class: "Product_photo" ) %></div>
-          <div class="item"><%=image_tag("362.png", class: "Product_photo" ) %></div>
-
-        </div>
-
-
-      </div>
-
-      <div class="col-md-7 details shadow">
-
-        <div class="product-bottom">
-          <div class="productboxkat">Naziv Kategorije</div>
-          <div class="row">
-            <div class="productbox"><a href="single.html">artikl</a></div>
-            <div class="productboxprice"><span class=" item_price">cijena</span></div>
-          </div>
-          <div class="productboxopis">
-            <p>Lorem ipsum dolor sit amet, eu duo elit lorem. Probo summo ne mea. Vis admodum accusam postulant te, te ubique epičurei has, pro sumo quot intellegebat eu. Cu insolens efficiendi eam. Et ius sale suscipit dignissim, sea ću utroque tacimates čonsetetur, čommune delicata sed ei. Et graeco iuvaret bonorum sea, neč te detracto sađipsčing eloquentiam, hiš ču altera sensibuš. Hinc veniam conceptam vel no, mel saperet euripiđiš honestatis te.</p>
-          </div>
-          <div class="row" style="margin-bottom:20px;">
-            <div class="col-md-6">
-              <div class="productboxcolor">Veličina* </div>
-              <div class="styled-select">
-
-                <select class="ddboje">
-                  <option>6</option>
-                  <option>6,5</option>
-                  <option>7</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="boje">
-                <p id="P_2">
-                  Boja*
-                </p>
-                <a href="#" id="boja1"></a>
-                <a href="#" id="boja2"></a>
-                <a href="#" id="boja3"></a>
-                <a href="#" id="boja4"></a>
-                <a href="#" id="boja5"></a>
-              </div>
-              <!--<div class="productboxcolor">boja artikla: </div>
-              <div class="styled-select">
-
-                  <select class="ddboje">
-                      <option>Ljubičasta</option>
-                      <option>Narančasta</option>
-                      <option>Bijela</option>
-                  </select>
-              </div>-->
-            </div>
-
-          </div>
-
-          <div class="row" style="margin-bottom:30px;">
-            <div class="col-md-6 productboxcart" style="margin-top:20px;">
-              <div class="hcart">
-                <h4><a onclick="notice1Sec()" class="item_add" ><i></i><span> Dodaj u košaricu</span></a></h4>
-
-              </div>
-            </div>
-
-            <div class="col-md-6 productboxcart">
-              <div class="productboxcolor">Količina*</div>
-              <div class="styled-select">
-
-                <select class="ddboje">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Mask to cover the whole screen -->
-  <div id="mask"></div>
-</div>
 
 
 
