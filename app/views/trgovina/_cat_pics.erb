@@ -5,7 +5,7 @@
       <div class="about-top grid-1">
         <% materials.each do |material| %>
             <div class="col-md-4 about-left">
-              <%= link_to index_of_trgovina_index_path(id: material.id) do %>
+              <%= link_to index_of_trgovina_index_path(id: material.id), :method => :get do %>
                   <figure class="effect-bubba shadow">
                     <% if material.avatar_file_name.nil? %>
                       <%=image_tag("slika_kateg.jpg", class: "img-responsive" ) %>
@@ -29,3 +29,13 @@
 </div>
 
 <%= paginate materials %>
+
+<script>
+
+  $('[data-countdown]').each(function() {
+    var $this = $(this), finalDate = $(this).data('countdown');
+    $this.countdown(finalDate, function(event) {
+      $this.html(event.strftime('%D dana %H:%M:%S'));
+    });
+  })
+</script>

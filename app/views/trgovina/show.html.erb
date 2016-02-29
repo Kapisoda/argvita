@@ -3,7 +3,7 @@
   <div class="container">
     <div class="breadcrumbs-main">
       <ol class="breadcrumb">
-        <li><a href="index.html">Početna</a></li>
+        <li><%= link_to "Početna", root_path %></li>
         <!--TODO: staviti naziv artikla koji je na stranici-->
         <li class="active"><%= @article.title %></li>
       </ol>
@@ -22,16 +22,14 @@
           <div class="col-md-4 single-top-left">
 
             <% if @article.on_discount == true && @article.discount != 0 %>
-                <div class="srch">
+                <div class="dialog-srch srch">
                   <span><%= @article.discount %>%</span>
                 </div>
             <% end %>
             <!--TODO: postotak na modal dialogu-->
             <div class="item">
-
               <div class="clearfix" style="max-width:474px;">
-                <ul id="image-gallery" class=" thumbnail gallery list-unstyled cS-hidden">
-
+                <ul id="image-gallery" class="thumbnail gallery list-unstyled cS-hidden">
                   <% if !@article.pictures.first.nil? %>
                       <% @ind = @article.picture.image.url(:picture) %>
                       <li   data-thumb="<%=  @article.picture.image.url(:thumbgal) %>">
@@ -55,7 +53,8 @@
 
 
 
-            </div>
+
+          </div>
 
 
           </div>
@@ -132,7 +131,7 @@
 
               <% end %>
               <% if  !@rel_arts.nil? && !@rel_arts.empty? %>
-              <div class="page-header" style="padding-left: 25px; margin: 0;">
+              <div class="page-header" style="padding-left: 25px; margin-top: 50px;">
                 <h1>Srodni Artikli</h1>
               </div>
 
