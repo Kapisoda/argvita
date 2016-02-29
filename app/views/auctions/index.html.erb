@@ -29,7 +29,7 @@
 
                     <!--NOTE: kratki opis od jednog reda-->
                     <h4><div data-countdown="<%= art.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></h4>
-                    <h4><strong><% if art.user_id == current_user.id %>Vaša ponuda:<% else %>Trenutna ponuda:<% end %></strong><p></p><%= number_to_currency(art.highest_bid.nil? ? art.starting_price : art.highest_bid, :unit => 'Kn', :format => "%n %u") %></p></h4>
+                    <h4><strong><% if art.user_id == (current_user.nil? ? nil : current_user.id ) %>Vaša ponuda:<% else %>Trenutna ponuda:<% end %></strong><p></p><%= number_to_currency(art.highest_bid.nil? ? art.starting_price : art.highest_bid, :unit => 'Kn', :format => "%n %u") %></p></h4>
 
                   </div>
                 </div>
@@ -46,7 +46,7 @@
 
                     <!--NOTE: kratki opis od jednog reda-->
                     <h4><div data-countdown="<%= art.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></h4>
-                    <h4><strong><% if art.user_id == current_user.id %>Vaša ponuda:<% else %>Trenutna ponuda:<% end %></strong><p></p><%= number_to_currency(art.highest_bid.nil? ? art.starting_price : art.highest_bid, :unit => 'Kn', :format => "%n %u") %></p></h4>
+                    <h4><strong><% if art.user_id == (current_user.nil? ? nil : current_user.id ) %>Vaša ponuda:<% else %>Trenutna ponuda:<% end %></strong><p></p><%= number_to_currency(art.highest_bid.nil? ? art.starting_price : art.highest_bid, :unit => 'Kn', :format => "%n %u") %></p></h4>
 
                   </div>
                 </div>

@@ -11,7 +11,12 @@
               <div class="product-bottom">
                 <h3><%= art.title %></h3>
                 <!--NOTE: kratki opis od jednog reda-->
-                <p>detalji</p>
+
+                <% if art.on_discount == true && art.end_date != nil %>
+                  <h4><div data-countdown="<%= art.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></h4>
+                <% else %>
+                    <h4> - </h4>
+                <% end %>
 
                 <h4><%= link_to carts_articles_create_path(art.id ), class: "item_add"  do %><i></i><% end %><span class=" item_price"><%= number_to_currency(art.cost, :unit => 'Kn', :format => "%n %u") %></span></h4>
 
