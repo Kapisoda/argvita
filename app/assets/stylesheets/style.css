@@ -3512,3 +3512,6 @@ font-family: 'Exo 2', sans-serif;
 
 }
 
+#image-gallery {
+    border-top: none;
+}

@@ -21,32 +21,39 @@
         <div class="sngl-top">
           <div class="col-md-4 single-top-left">
 
-            <div class="dialog-srch srch">20%</div>
+            <% if @article.on_discount == true && @article.discount != 0 %>
+                <div class="srch">
+                  <span><%= @article.discount %>%</span>
+                </div>
+            <% end %>
             <!--TODO: postotak na modal dialogu-->
-            <div id="modal-photo" class="owl-carousel">
+            <div class="item">
 
+              <div class="clearfix" style="max-width:474px;">
+                <ul id="image-gallery" class=" thumbnail gallery list-unstyled cS-hidden">
 
-              <% if !@article.pictures.first.nil? %>
-                  <% @ind = @article.picture.image.url(:picture) %>
-                  <div class="item"><%=image_tag( @article.picture.image.url(:picture) , class: "Product_photo" ) %></div>
-                <% @article.pictures.each do |pic| %>
+                  <% if !@article.pictures.first.nil? %>
+                      <% @ind = @article.picture.image.url(:picture) %>
+                      <li   data-thumb="<%=  @article.picture.image.url(:thumbgal) %>">
+                        <%= image_tag(@article.picture.image.url(:picture)) %>
+                      </li>
+                      <% @article.pictures.each do |pic| %>
 
-                   <% if @ind != pic.image.url(:picture) %>
-                    <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
-                  <% end %>
-                <% end %>
-              <% end %>
+                          <% if @ind != pic.image.url(:picture) %>
 
-                <% @article.single_articles.each do |sa| %>
+                              <li data-thumb="<%=  pic.image.url(:thumbgal) %>">
+                                <%= image_tag(pic.image.url(:picture)) %>
+                              </li>
 
-                    <% if sa.pictures.first != nil %>
-                      <% sa.pictures.each do |sa_pic| %>
-                          <div class="item"><%= image_tag(sa_pic.image.url(:picture), class: "Product_photo") %></div>
+                          <% end %>
                       <% end %>
                   <% end %>
 
+                </ul>
+              </div>
+            </div>
 
-                <% end %>
+
 
             </div>
 
@@ -194,3 +201,4 @@
               </div>
 
 <!--end-single-->
+

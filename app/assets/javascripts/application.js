@@ -15,4 +15,6 @@
 //= require filterrific/filterrific-jquery
 //= require filter
 //= require modal
+//= require lightsliderInit
+//= require lightslider
 //= require_tree .
