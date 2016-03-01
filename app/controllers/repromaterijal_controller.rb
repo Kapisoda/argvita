@@ -55,6 +55,15 @@ class RepromaterijalController < ApplicationController
     if params[:id] != nil
       $subcategory_id = params[:id]
     end
+
+    gon.max = Article.where(raw: true, for_sale: true, subcategory_id: $subcategory_id ).order(cost: :desc).pluck(:cost).first.to_f.ceil
+
+    puts "Najveca cijena je #{gon.max}"
+
+    gon.min = Article.where(raw: true, for_sale: true, subcategory_id: $subcategory_id ).order(:cost).pluck(:cost).first.to_f.ceil
+
+    puts "Najmanja cijena je #{gon.min}"
+
     # filterific ###########################################################################################################################
     @page_title = "Artikli"
     @filterrific = initialize_filterrific(Article.where(raw: true, for_sale: true, subcategory_id: $subcategory_id ), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,

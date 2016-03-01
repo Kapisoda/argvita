@@ -135,6 +135,25 @@
   })
 </script>
 
+<script>
+  $(function () {
+
+    $("#range").ionRangeSlider({
+      hide_min_max: true,
+      keyboard: true,
+      min: parseFloat(gon.min).toFixed(2),
+      max: parseFloat(gon.max).toFixed(2),
+      from: 0,
+      to: 5000,
+      type: 'double',
+      step: 1,
+      postfix: " kn",
+      grid: true
+    });
+
+  });
+
+</script>
 
 
 

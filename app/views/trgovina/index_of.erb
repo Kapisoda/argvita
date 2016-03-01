@@ -140,4 +140,23 @@
     });
 </script>
 
+<script>
+  $(function () {
+
+    $("#range").ionRangeSlider({
+      hide_min_max: true,
+      keyboard: true,
+      min: gon.min,
+      max: gon.max,
+      from: 0,
+      to: 5000,
+      type: 'double',
+      step: 10,
+      postfix: " kn",
+      grid: true
+    });
+
+  });
+
+</script>
 
