@@ -66,6 +66,9 @@
                 <div class="productbox"><%= @article.title %></div>
                 <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
               </div>
+              <div class="row">
+                <div class="productboxkat"><strong>Kod Artikla:</strong> <%= @article.code %></div>
+              </div>
               <div class="productboxopis-site">
                 <p><%= @article.description %></p>
               </div>

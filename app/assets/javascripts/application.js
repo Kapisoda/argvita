@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require filterrific/filterrific-jquery
 //= require filter
-//= require modal
 //= require lightsliderInit
 //= require lightslider
+//= require sky-forms-ie8.js
+//= require jquery.placeholder.min
+//= require modal
 //= require_tree .
