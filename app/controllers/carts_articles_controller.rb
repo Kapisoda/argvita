@@ -249,27 +249,37 @@ class CartsArticlesController < ApplicationController
 
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
 
-    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: params[:article][:id] )
+    @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id )
+
+    article_amount = @single_article.amount.nil? ? 9999 : @single_article.amount
 
     if @carts_article == nil
-      if @single_article.amount >= params[:article][:amount].to_i
+      puts "Samo jedan takav artikl postoji!"
+        if article_amount >= params[:article][:amount].to_i
 
-        CartsArticle.create(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id, amount: params[:article][:amount])
+          CartsArticle.create(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id, amount: params[:article][:amount])
 
-      end
+        else
+
+          flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+          return redirect_to :back
+
+        end
 
     else
 
-    if @carts_article.amount <= @single_article.amount
-      @carts_article.amount += params[:article][:amount].to_i
+        if article_amount >= @carts_article.amount+params[:article][:amount].to_i
+          @carts_article.amount += params[:article][:amount].to_i
+          @carts_article.save
 
-    else
+        else
 
-    flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
-    return redirect_to :back
+        flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+        return redirect_to :back
+
+        end
 
     end
-  end
   #kad nema usera   ################################################################################################################
 
 =begin
