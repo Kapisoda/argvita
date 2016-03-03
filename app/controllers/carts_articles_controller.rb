@@ -55,7 +55,7 @@ class CartsArticlesController < ApplicationController
         @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
       elsif @carts_article.amount < @article.amount
 
-        @carts_article.amount += params[:article] ? params[:article][:amount] : 1
+        @carts_article.amount += params[:article] ? params[:article][:amount].to_i : 1
         @carts_article.save
       end
 
@@ -261,7 +261,7 @@ class CartsArticlesController < ApplicationController
     else
 
     if @carts_article.amount <= @single_article.amount
-      @carts_article.amount += params[:article][:amount]
+      @carts_article.amount += params[:article][:amount].to_i
 
     else
 
