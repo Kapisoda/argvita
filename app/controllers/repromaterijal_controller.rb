@@ -92,14 +92,9 @@ class RepromaterijalController < ApplicationController
 
   def index
 
-    if current_user ==nil
-      @no_articles = Article.where(id: $no_user_articles.keys)
-      @sa = SingleArticle.where(id: $no_user_single_articles.keys)
-    end
 
-
-    @subcategories = Subcategory.all #category
-    @ssubcategories = Ssubcategory.all #materijal
+    @ssubcategories = Ssubcategory.all
+    @subcategories = Subcategory.all
 
     puts "Usao je u trgovina#index"
 
@@ -111,15 +106,35 @@ class RepromaterijalController < ApplicationController
       @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
     else
       puts "NEMA USER-A!!!!"
-      @articles_no_user = Article.where(id: $no_user_articles.keys)
+
+      @no_articles = Article.where(id: $no_user_articles.keys)
+      @sa = SingleArticle.where(id: $no_user_single_articles.keys)
     end
 
+    if params[:id] != nil
+      $subcategory_id = params[:id]
+    end
 
+    gon.max = Article.where(raw: true, for_sale: true ).order(cost: :desc).pluck(:cost).first.to_f.ceil
+
+    puts "Najveca cijena je #{gon.max}"
+
+    gon.min = Article.where(raw: true, for_sale: true ).order(:cost).pluck(:cost).first.to_f.ceil
+
+    puts "Najmanja cijena je #{gon.min}"
+    $ssub = nil
+
+    if params[:filterrific]
+      $ssub = params[:filterrific][:with_subcategory_id]
+    end
+puts "SSUB JE #{$ssub}"
     # filterific ###########################################################################################################################
     @page_title = "Artikli"
-    @filterrific = initialize_filterrific(Article.where(raw: true, for_sale: true), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
-                                                                                                                            with_subcategory_id: Subcategory.options_for_select,
-                                                                                                                             with_ssubcategory_id: Ssubcategory.options_for_select}) or return
+    @filterrific = initialize_filterrific(Article.where(raw: true, for_sale: true ), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
+                                                                                                                                                              with_subcategory_id: Subcategory.options_for_select,
+                                                                                                                                                              with_ssubcategory_id: Ssubcategory.options_for_select,
+                                                                                                                                                              with_color_id: Color.options_for_select,
+                                                                                                                                                              with_type_id: Type.options_for_select},:persistence_id => false,) or return
 
 
     @articles = @filterrific.find.page(params[:page])
@@ -128,6 +143,7 @@ class RepromaterijalController < ApplicationController
       format.html
       format.js
     end
+
 
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.

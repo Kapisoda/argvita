@@ -7,6 +7,7 @@ class PurchasesController < ApplicationController
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
     @carts_article = CartsArticle.where(shopping_cart_id: @shopping_cart.id)
 
+    #TODO ukupna cijena bi se ovdje trebala postavljat na nulu
     @current_purchase_sum = 0
 
     if @carts_article == nil

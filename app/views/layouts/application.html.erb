@@ -270,10 +270,10 @@
 
             <li class="<%= params[:controller]== 'home' ? 'active' : '' %>" ><%= link_to 'Početna', root_path, :method => :get%></li>
 
-            <li class="<%= params[:controller]== 'trgovina' && params[:action] == 'categories' ? 'active' : '' %>"> <%= link_to 'Gotov nakit', categories_path, :method => :get %>
+            <li class="<%= params[:controller]== 'trgovina' ? 'active' : '' %>"> <%= link_to 'Gotov nakit', trgovina_index_path, :method => :get %>
 
             </li>
-            <li class="<%= params[:controller]== 'repromaterijal' && params[:action] == 'categories' ? 'active' : '' %>"> <%= link_to 'Repromaterijal', categories_repro_path, :method => :get %>
+            <li class="<%= params[:controller]== 'repromaterijal' ? 'active' : '' %>"> <%= link_to 'Repromaterijal', repromaterijal_index_path, :method => :get %>
 
             </li>
             <li class="<%= params[:controller]== 'auctions' ? 'active' : '' %>"> <%= link_to 'Aukcije', auctions_index_path, :method => :get %>

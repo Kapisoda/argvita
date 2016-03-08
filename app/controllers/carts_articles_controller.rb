@@ -21,6 +21,8 @@ class CartsArticlesController < ApplicationController
 
     art_id = params[:format] ? params[:format] : params[:article][:id]
 
+    amount = params[:article] ? params[:article][:amount].to_i : 1
+
     @article = Article.find(art_id)
 
     if current_user == nil  # kad nema usera #############################################################################################
@@ -53,10 +55,14 @@ class CartsArticlesController < ApplicationController
       if @carts_article == nil
         CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: art_id, amount: params[:article] ? params[:article][:amount] : 1 )
         @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
-      elsif @carts_article.amount < @article.amount
-
-        @carts_article.amount += params[:article] ? params[:article][:amount].to_i : 1
+      elsif @carts_article.amount+amount <= @article.amount
+        #TODO ovdje treba promjenit provjeru za amount
+        @carts_article.amount += amount
         @carts_article.save
+      else
+        flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+        return redirect_to :back
+
       end
 
     end
@@ -67,17 +73,13 @@ class CartsArticlesController < ApplicationController
 
         $items_cost += @article.cost
 
-      end
+      elsif current_user != nil
 
-      if current_user != nil
-        if @carts_article.amount < @article.amount
-          # @article.amount-=1                                         #smanjivanje amounta u bazi ###################################################
-           @shopping_cart.current_cost += @article.cost
+         #TODO tu se dodaje samo jedna cijena ne gleda se na amount odjednom stavljenih proizvoda u kosaricu
+           @shopping_cart.current_cost += @article.cost*amount
            @shopping_cart.save
-        else
-          flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
 
-        end
+
       end
 
 
@@ -86,14 +88,17 @@ class CartsArticlesController < ApplicationController
 
         $items_cost += (@article.cost- (@article.cost*@article.discount/100))
 
-      end
-        @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))
+      elsif current_user != nil
+
+        @shopping_cart.current_cost += (@article.cost- (@article.cost*@article.discount/100))*amount
         @shopping_cart.save
+      end
     end
 
     redirect_to :back
 
   end
+
 
   def single
 
@@ -110,7 +115,10 @@ class CartsArticlesController < ApplicationController
     puts "Usao sam u single!!!"
 
     if params[:article]
+
       art = Article.find_by(id: params[:article][:id])
+
+   #TODO za artikl se ne provjerava kolicina za ukupnu cijenu
 
       if art.on_discount != nil && art.on_discount == true
         prize = (art.cost- (art.cost*art.discount/100))
@@ -169,6 +177,7 @@ class CartsArticlesController < ApplicationController
 
         #puts "Komplet #{complement.complement.nil? ? "DA NULL JE" : "NIJE NULL"}"
 
+        #TODO ne provjerava se amount na skladistu
         if @cart_single != nil
           @cart_single.amount += params[:article][:amount].to_i
           @cart_single.save
@@ -194,7 +203,8 @@ class CartsArticlesController < ApplicationController
     end
 
     if current_user != nil
-    @shopping_cart.current_cost += prize
+      #TODO cijena se na kraju ovdije dodaje
+    @shopping_cart.current_cost += prize*params[:article][:amount].to_i
     @shopping_cart.save
     end
 
@@ -240,9 +250,6 @@ class CartsArticlesController < ApplicationController
     puts "USAO SAM U CREATE SINGLE"
 
     @single_article = SingleArticle.find_by(article_id: params[:article][:id], size: params[:article][:size])
-
-
-
 
   # kad ima usera #############################################################################################
 
@@ -297,11 +304,6 @@ class CartsArticlesController < ApplicationController
 =end
 
 
-    @shopping_cart.current_cost += @single_article.article.cost
-    @shopping_cart.save
-
-
-
   ###################################################################################################################################
 
     if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
@@ -310,6 +312,9 @@ class CartsArticlesController < ApplicationController
         $items_cost += @single_article.article.cost
 
       end
+
+      @shopping_cart.current_cost += @single_article.article.cost*params[:article][:amount].to_i
+      @shopping_cart.save
 
 
 
@@ -321,7 +326,7 @@ class CartsArticlesController < ApplicationController
 
       end
 
-      @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
+      @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))*params[:article][:amount].to_i
       @shopping_cart.save
     end
 

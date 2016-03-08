@@ -19,4 +19,6 @@
 //= require sky-forms-ie8.js
 //= require jquery.placeholder.min
 //= require modal
+//= require chosen-jquery
+//= require select_category
 //= require_tree .

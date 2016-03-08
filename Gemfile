@@ -39,7 +39,7 @@ gem 'devise'
 gem 'gibbon'
 gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
-
+gem 'chosen-rails'
 #jesen
 gem 'filterrific'
 

@@ -53,6 +53,9 @@ Rails.application.config.assets.precompile += %w( jquery.countdown.js)
 Rails.application.config.assets.precompile += %w( jquery.countdown.min.js )
 Rails.application.config.assets.precompile += %w( lightslider.js )
 Rails.application.config.assets.precompile += %w( lightsliderInit.js )
+Rails.application.config.assets.precompile += %w( select_category.coffee )
+Rails.application.config.assets.precompile += %w( scaffold.coffee )
+
 
 Rails.application.config.assets.precompile += %w( 11.png )
 Rails.application.config.assets.precompile += %w( 100.png )

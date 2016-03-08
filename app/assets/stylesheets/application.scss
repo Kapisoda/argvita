@@ -24,4 +24,11 @@
  *= require owl.transitions
  *= require style
  *= require lightslider
+ *= require chosen
  */
+
+.select-cat {
+  display: block;
+  position: absolute;
+  float: right;
+}

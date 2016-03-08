@@ -31,7 +31,7 @@ class TrgovinaController < ApplicationController
   end
 
   def index_of
-    @categories = Category.where(id: CategoryMaterial.where(material_id: params[:id]).pluck(:category_id) )
+    @categories = Category.all
     @materials = Material.all
 
     puts "Usao je u trgovina#index"
@@ -93,6 +93,8 @@ class TrgovinaController < ApplicationController
 
   end
 
+
+
   def index
     @categories = Category.all
     @materials = Material.all
@@ -109,18 +111,31 @@ class TrgovinaController < ApplicationController
       puts "NEMA USER-A!!!!"
 
 
-
-
       @no_articles = Article.where(id: $no_user_articles.keys)
       @sa = SingleArticle.where(id: $no_user_single_articles.keys)
     end
 
 
+
+    if params[:id] != nil
+      $material_id = params[:id]
+    end
+
+    gon.max = Article.where(raw: false, for_sale: true ).order(cost: :desc).pluck(:cost).first.to_f.ceil
+
+    puts "Najveca cijena je #{gon.max}"
+
+    gon.min = Article.where(raw: false, for_sale: true ).order(:cost).pluck(:cost).first.to_f.ceil
+
+    puts "Najmanja cijena je #{gon.min}"
+
     # filterific ###########################################################################################################################
     @page_title = "Artikli"
-    @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
-                                                                                                                             with_category_id: Category.options_for_select,
-                                                                                                                             with_material_id: Material.options_for_select}) or return
+    @filterrific = initialize_filterrific(Article.where(raw: false, for_sale: true ), params[:filterrific], select_options: { sorted_by: Article.options_for_sorted_by,
+                                                                                                                                                         with_category_id: Category.options_for_select,
+                                                                                                                                                         with_material_id: Material.options_for_select,
+                                                                                                                                                         with_color_id: Color.options_for_select,
+                                                                                                                                                         with_type_id: Type.options_for_select},:persistence_id => false,) or return
 
 
     @articles = @filterrific.find.page(params[:page])
@@ -130,6 +145,7 @@ class TrgovinaController < ApplicationController
       format.js
     end
 
+
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"
@@ -138,6 +154,8 @@ class TrgovinaController < ApplicationController
     ###########################################################################################################################
 
   end
+
+
 
   def show
     @article = Article.find(params[:format])

@@ -1,89 +1,137 @@
-
-
-
-
-
+<div class="bnr" id="home">
+  <div id="top" class="callbacks_container">
+    <ul class="rslides" id="slider4">
+      <% ShopBanner.where(active: true).each do |bann| %>
+          <li>
+            <%=image_tag(bann.image.url(:bannsm)) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="clearfix"> </div>
+</div>
 <!--bottom-header-->
 <!--start-breadcrumbs-->
 
 <!--end-breadcrumbs-->
 <!--prdt-starts-->
-<div class="prdt">
-  <div class="container">
-    <div class="prdt-top">
-      <div class="col-md-9 prdt-left">
 
-        <%= render(
-                partial: 'trgovina/show_pics',
-                locals: { articles: @articles }
-            ) %>
 
-      </div>
-      <%= form_for_filterrific @filterrific do |f| %>
+<%= form_for_filterrific @filterrific do |f| %>
+    <div class="prdt">
+      <div class="container">
+        <div class="prdt-top">
+          <div class="col-md-9 prdt-left">
+            <%= render_filterrific_spinner %>
+            <%= render(
+                    partial: 'trgovina/show_pics',
+                    locals: { articles: @articles }
+                ) %>
 
-          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-
-    <div class="col-md-3 prdt-right">
-        <div class="w_sidebar">
-          <section class="sky-form">
-            <h4>Materijal</h4>
-            <div class="row1 scroll-pane" >
-
-              <div class="col col-4">
-                <% @materials.each do |a| %>
-
-                <label class="checkbox">
-                  <%= f.check_box(:with_material_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false) %><i></i> <%= a.title %></label>
-                <% end %>
-              </div>
-            </div>
-          </section>
-          <section class="sky-form">
-            <h4>Kategorije</h4>
-            <div class="row1 scroll-pane">
-
-              <div class="col col-4">
-                <% @categories.all.each do |a| %>
-                <label class="checkbox">
-                  <%= f.check_box(:with_category_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
-                <% end %>
-
-              </div>
-            </div>
-          </section>
+          </div>
 
 
           <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
 
+          <div class="col-md-3 prdt-right">
+            <div class="w_sidebar">
+
+              <section class="sky-form">
+                <h4>Pretraga</h4>
+                <div class="row1 scroll-pane">
+
+                  <div class="col col-4">
+                    <%= f.text_field(
+                            :search_query,
+                            class: 'form-control filterrific-periodically-observed', placeholder: "pretraga proizvoda..."
+                        ) %>
+
+                  </div>
+                </div>
+              </section>
+
+              <section class="sky-form">
+                <h4>Materijali</h4>
+                <div class="row1 scroll-pane">
+
+                  <div class="col col-4">
+                    <% @materials.each do |a| %>
+                        <label class="checkbox">
+                          <%= f.check_box(:with_material_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                    <% end %>
+
+                  </div>
+                </div>
+              </section>
+
+              <section class="sky-form">
+                <h4>Kategorije</h4>
+                <div class="row1 scroll-pane">
+
+                  <div class="col col-4">
+                    <% @categories.each do |a| %>
+                        <label class="checkbox">
+                          <%= f.check_box(:with_category_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                    <% end %>
+
+                  </div>
+                </div>
+              </section>
 
 
-          <section class="sky-form">
-            <h4>CIJENA</h4>
-            <div>
-              <%= f.text_field(
-                      :min_cost,
-                      class: 'form-control filterrific-periodically-observed', id: 'range', multiple: true
-                  ) %>
+              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+
+              <section class="sky-form">
+                <h4>CIJENA</h4>
+                <div>
+                  <%= f.text_field(
+                          :min_cost,
+                          class: 'form-control filterrific-periodically-observed', id: 'range', multiple: true
+                      ) %>
+
+                </div>
+              </section>
+
+
 
             </div>
-          </section>
+          </div>
+<% end %>
+<div class="clearfix"></div>
 
-
-
-        </div>
-      </div>
-      <% end %>
-      <div class="clearfix"></div>
-
-    </div>
-  </div>
+</div>
+</div>
 </div><!--product-end-->
 <!--kraj sidebara -->
 <!--product-end-->
 
+<script>
 
+  $('[data-countdown]').each(function () {
+    var $this = $(this), finalDate = $(this).data('countdown');
+    $this.countdown(finalDate, function (event) {
+      $this.html(event.strftime('%D dana %H:%M:%S'));
+    });
+  });
+</script>
 
+<script>
+  $(function () {
 
+    $("#range").ionRangeSlider({
+      hide_min_max: true,
+      keyboard: true,
+      min: gon.min,
+      max: gon.max,
+      from: 0,
+      to: 5000,
+      type: 'double',
+      step: 10,
+      postfix: " kn",
+      grid: true
+    });
 
+  });
 
+</script>
 
