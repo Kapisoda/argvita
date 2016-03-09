@@ -66,11 +66,11 @@
                 </div>
               </section>
 
-              <section class="sky-form" style=" padding-top: 10px; padding-bottom: 35px;">
+              <section class="sky-form">
                 <h4>PodKategorije</h4>
-                <div class="row1 scroll-pane" style="float: right; position: absolute; display: block;">
+                <div class="row1 scroll-pane"  style=" padding-top: 10px; padding-bottom: 35px;">
 
-                  <div class="col col-4" style=" height:auto">
+                  <div class="col col-4"  style="float: right; position: absolute; display: block;">
                     <%= f.grouped_collection_select(
                            :with_ssubcategory_id,
                            Subcategory.order(:title),
