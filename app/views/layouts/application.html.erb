@@ -104,7 +104,7 @@
                           <% end %>
                             <!-- TODO napravi da se prikazuje slika od tocno tog single_article-a, a ne od cijelokupnog artikla -->
                           <span class="item-price"><%=  number_to_currency(i.single_article.article.cost, :unit => 'Kn', :format => "%n %u") %></span>
-                          <span class="quantity"><%= i.amount %></span>
+                          <span class="quantity">stavki: <%= i.amount %></span>
                           <%= link_to 'remove', destroy_single_shopping_carts_path(i.single_article.id), :method => :put, class: "quantity" %>
                         </li>
 
@@ -410,7 +410,7 @@
         </form>
       </div>
       <div class="col-md-6 footer-right">
-        <p>© 2015 Argentum Vita. All Rights Reserved | Design by <a href="" target="_blank">cactus code</a> </p>
+        <p>© 2015 Argentum Vita. All Rights Reserved | Design by <a href="http:\\www.cactus-code.com" target="_blank">CactusCode</a> </p>
       </div>
       <div class="clearfix"></div>
     </div>

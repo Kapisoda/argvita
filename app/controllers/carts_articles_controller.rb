@@ -51,10 +51,18 @@ class CartsArticlesController < ApplicationController
 
     @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
 
+    puts @carts_article
 
       if @carts_article == nil
+
+      if amount <= @article.amount
         CartsArticle.create(shopping_cart_id: @shopping_cart.id, article_id: art_id, amount: params[:article] ? params[:article][:amount] : 1 )
         @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id, article_id: art_id )
+      else
+        flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
+        return redirect_to :back
+      end
+
       elsif @carts_article.amount+amount <= @article.amount
         #TODO ovdje treba promjenit provjeru za amount
         @carts_article.amount += amount
@@ -249,7 +257,11 @@ class CartsArticlesController < ApplicationController
 
     puts "USAO SAM U CREATE SINGLE"
 
-    @single_article = SingleArticle.find_by(article_id: params[:article][:id], size: params[:article][:size])
+    if params[:article]
+      @single_article = SingleArticle.find_by(article_id: params[:article][:id], size: params[:article][:size])
+    else
+      @single_article = SingleArticle.find_by(id: params[:id])
+    end
 
   # kad ima usera #############################################################################################
 
@@ -260,11 +272,17 @@ class CartsArticlesController < ApplicationController
 
     article_amount = @single_article.amount.nil? ? 9999 : @single_article.amount
 
+    if params[:article]
+      amount = params[:article][:amount].to_i
+    else
+      amount = 1
+    end
+
     if @carts_article == nil
       puts "Samo jedan takav artikl postoji!"
-        if article_amount >= params[:article][:amount].to_i
+        if article_amount >= amount
 
-          CartsArticle.create(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id, amount: params[:article][:amount])
+          CartsArticle.create(shopping_cart_id: @shopping_cart.id, single_article_id: @single_article.id, amount: amount)
 
         else
 
@@ -275,8 +293,8 @@ class CartsArticlesController < ApplicationController
 
     else
 
-        if article_amount >= @carts_article.amount+params[:article][:amount].to_i
-          @carts_article.amount += params[:article][:amount].to_i
+        if article_amount >= @carts_article.amount+amount
+          @carts_article.amount += amount
           @carts_article.save
 
         else
@@ -285,6 +303,8 @@ class CartsArticlesController < ApplicationController
         return redirect_to :back
 
         end
+
+
 
     end
   #kad nema usera   ################################################################################################################
@@ -313,7 +333,7 @@ class CartsArticlesController < ApplicationController
 
       end
 
-      @shopping_cart.current_cost += @single_article.article.cost*params[:article][:amount].to_i
+      @shopping_cart.current_cost += @single_article.article.cost*amount
       @shopping_cart.save
 
 
@@ -326,7 +346,7 @@ class CartsArticlesController < ApplicationController
 
       end
 
-      @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))*params[:article][:amount].to_i
+      @shopping_cart.current_cost += (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))*amount
       @shopping_cart.save
     end
 

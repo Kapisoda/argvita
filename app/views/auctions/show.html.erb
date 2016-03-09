@@ -8,30 +8,29 @@
 
             <!--TODO: postotak na modal dialogu-->
 
-            <div id="modal-photo" class="owl-carousel">
+            <!--TODO: postotak na modal dialogu-->
+            <div class="item">
+              <div class="clearfix" style="max-width:474px;">
+                <ul id="image-gallery" class="thumbnail gallery list-unstyled cS-hidden">
+                  <% if !@auction.article.pictures.first.nil? %>
+                      <% @ind = @auction.article.picture.image.url(:picture) %>
+                      <li   data-thumb="<%=  @auction.article.picture.image.url(:thumbgal) %>">
+                        <%= image_tag(@auction.article.picture.image.url(:picture)) %>
+                      </li>
+                      <% @auction.article.pictures.each do |pic| %>
 
-              <% if !@auction.article.pictures.first.nil? %>
-                  <% @ind = @auction.article.picture.image.url(:picture) %>
-                  <div class="item"><%=image_tag( @auction.article.picture.image.url(:picture) , class: "Product_photo" ) %></div>
-                  <% @auction.article.pictures.each do |pic| %>
+                          <% if @ind != pic.image.url(:picture) %>
 
-                      <% if @ind != pic.image.url(:picture) %>
-                          <div class="item"><%=image_tag( pic.image.url(:picture) , class: "Product_photo" ) %></div>
+                              <li data-thumb="<%=  pic.image.url(:thumbgal) %>">
+                                <%= image_tag(pic.image.url(:picture)) %>
+                              </li>
+
+                          <% end %>
                       <% end %>
                   <% end %>
-              <% end %>
 
-              <% @auction.article.single_articles.each do |sa| %>
-
-                  <% if sa.pictures.first != nil %>
-                      <% sa.pictures.each do |sa_pic| %>
-                          <div class="item"><%= image_tag(sa_pic.image.url(:picture), class: "Product_photo") %></div>
-                      <% end %>
-                  <% end %>
-
-
-              <% end %>
-
+                </ul>
+              </div>
             </div>
 
 
@@ -82,7 +81,7 @@
                               <%= f.input :highest_bid, label: false, placeholder: number_to_currency(f.object.starting_price.round(2), :unit => 'Kn', :format => "%n %u") , class: "ddboje",:include_blank => false  %>
                           <% end %>
                           <small>Nova ponuda mora biti veća od trenutne</small>
-                          <h4><span><%= link_to "", class: "item_add" do %> <i></i> <%= f.button :submit,"Licitiraj" %> <% end %></span></h4></div>
+                          <h4><span> <%= button_tag( type: 'submit', class: 'btn btn-default gumb_kupnja') do %> <i></i>  Licitiraj <% end %></span></h4></div>
                       </div>
 
                     </div>

@@ -77,6 +77,7 @@ class PurchasesController < ApplicationController
 
     @carts_article.destroy_all
     @shopping_cart.current_cost = 0
+    @shopping_cart.save
 
     redirect_to root_path
 

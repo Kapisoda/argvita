@@ -60,14 +60,14 @@
           </div>
           <div class="col-md-7 details">
 
-            <div class="product-bottom">
+            <div class="product-bottom" style="margin: 0; padding: 0;">
               <div class="productboxkat"><%= @article.material.title %></div>
               <div class="row naslov-site">
                 <div class="productbox"><%= @article.title %></div>
                 <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
               </div>
               <div class="row">
-                <div class="productboxkat"><strong>Kod Artikla:</strong> <%= @article.code %></div>
+                <div class="productboxkata"><strong>Kod Artikla:</strong> <%= @article.code %></div>
               </div>
               <div class="productboxopis-site">
                 <p><%= @article.description %></p>
@@ -86,41 +86,45 @@
 
                 <%= f.input :id, :as => :hidden %>
 
-              <div class="row" style="margin-bottom:20px;">
+              <div class="row" >
 
                   <% if @article.single_articles.first != nil %>
                   <% if @article.single_articles.first.size != "" && @article.single_articles.first.size != nil %>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 artikli_margin_none">
                   <div class="productboxcolor">Veličina* </div>
 
                       <%= f.input :size, label: false, collection: SingleArticle.where(article_id: f.object.id).pluck(:size), class: "ddboje",:include_blank => false  %>
 
                       </div>
                     <% end %>
+                <% end %>
 
-                <div class="col-md-6"></div>
 
 
               </div>
 
 
-        <% end %>
 
-              <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-6 productboxcart" style="margin-top:20px;">
-                  <div class="hcart">
-                    <h4><span><%= link_to "", class: "item_add" do %> <i></i> <%= f.button :submit,"Dodaj u košaricu" %> <% end %></span></h4></div>
-                </div>
 
-                <div class="col-md-6 productboxcart">
+              <div class="row" >
+
+                <div class="col-md-6 artikli_margin_none">
                   <div class="productboxcolor">Količina*</div>
 
                   <%= f.input :amount, label: false ,input_html: { value: 1} %>
 
                 </div>
               </div>
-            </div>
+
+                <div class="row ">
+                  <div class="col-md-6 artikli_margin_none">
+                    <div class="hcart">
+                      <h4><span><%= button_tag(type: 'submit', class: 'btn btn-default gumb_kupnja') do %> <i></i>Dodaj u košaricu <% end %></span></h4>
+                    </div>
+                  </div>
+
+                </div>
 
 
           </div>

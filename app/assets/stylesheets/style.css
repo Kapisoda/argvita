@@ -3086,7 +3086,7 @@ ul.tag-men {
 .productbox {
     overflow: hidden;
     float: left;
-    margin: 5px 0 15px -15px;
+    margin: 5px 0 15px 0;
     font-size: 20px;
     text-transform: uppercase;
 	font-family: 'Exo 2', sans-serif;
@@ -3109,15 +3109,23 @@ ul.tag-men {
     font-weight: 300;
 }
 
+.productboxkata {
+    margin-left: 0px;
+    font-size: 16px;
+    color: #999;
+	font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+}
+
 .productboxopis {
     margin-bottom: 20px;
-    margin-left: -15px;
+    margin-left: 0px;
 }
 
 .productboxopis-site {
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: -15px;
+    margin-left: 0px;
 }
 
 .productboxcart {
@@ -3514,4 +3522,13 @@ font-family: 'Exo 2', sans-serif;
 
 #image-gallery {
     border: none;
+}
+
+.artikli_margin_none {
+    padding: 0;
+    margin-left: 0;
+}
+
+.gumb_kupnja:hover {
+    background-color: #1edab5;
 }
