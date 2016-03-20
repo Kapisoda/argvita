@@ -135,7 +135,7 @@ class TrgovinaController < ApplicationController
                                                                                                                                                          with_category_id: Category.options_for_select,
                                                                                                                                                          with_material_id: Material.options_for_select,
                                                                                                                                                          with_color_id: Color.options_for_select,
-                                                                                                                                                         with_type_id: Type.options_for_select},:persistence_id => false,) or return
+                                                                                                                                                         with_type_id: Type.options_for_select}) or return
 
 
     @articles = @filterrific.find.page(params[:page])
