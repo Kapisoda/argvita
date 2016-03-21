@@ -15,7 +15,7 @@ class AuctionsController < ApplicationController
 
     end
 
-    @auctions = Auction.all
+    @auctions = Auction.where(on_auction: true)
   end
 
   def show

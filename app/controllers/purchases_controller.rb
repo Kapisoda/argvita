@@ -31,7 +31,7 @@ class PurchasesController < ApplicationController
         end
 
         @current_purchase_sum += art_cost
-        PastPurchase.create(user_id: current_user.id, article_id: art.article.id, amount: art.amount, cost: art_cost)
+        PastPurchase.create(user_id: current_user.id, article_id: art.article.id, amount: art.amount, cost: art.cost)
 
         article = Article.find(art.article.id)
 
@@ -50,7 +50,7 @@ class PurchasesController < ApplicationController
 
         end
         @current_purchase_sum += art_cost
-        PastPurchase.create(user_id: current_user.id, single_article_id: art.single_article.id, amount: art.amount, cost: art_cost)
+        PastPurchase.create(user_id: current_user.id, single_article_id: art.single_article.id, amount: art.amount, cost: art.cost)
 
         article = SingleArticle.find(art.single_article.id)
 

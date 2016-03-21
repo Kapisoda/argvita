@@ -155,21 +155,15 @@ class ShoppingCartsController < ApplicationController
     if @carts_article.amount > 1
       @carts_article.amount -= 1
       @carts_article.save
-      if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
-        @shopping_cart.current_cost -= @article.cost
+
+        @shopping_cart.current_cost -= @carts_article.cost
         @shopping_cart.save
-      else
-        @shopping_cart.current_cost -= (@article.cost- (@article.cost*@article.discount/100))
-        @shopping_cart.save
-      end
+
     else
-      if @article.on_discount.nil? || @article.on_discount == false || @article.discount != 0
-        @shopping_cart.current_cost -= @article.cost
+
+        @shopping_cart.current_cost -= @carts_article.cost
         @shopping_cart.save
-      else
-        @shopping_cart.current_cost -= (@article.cost- (@article.cost*@article.discount/100))
-        @shopping_cart.save
-      end
+
       @carts_article.destroy!
     end
   end
@@ -191,21 +185,15 @@ class ShoppingCartsController < ApplicationController
     if @carts_article.amount > 1
       @carts_article.amount -= 1
       @carts_article.save
-      if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
-        @shopping_cart.current_cost -= @single_article.article.cost
+
+        @shopping_cart.current_cost -= @carts_article.cost
         @shopping_cart.save
-      else
-        @shopping_cart.current_cost -= (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
-        @shopping_cart.save
-      end
+
     else
-      if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount != 0
-        @shopping_cart.current_cost -= @single_article.article.cost
+
+        @shopping_cart.current_cost -= @carts_article.cost
         @shopping_cart.save
-      else
-        @shopping_cart.current_cost -= (@single_article.article.cost- (@single_article.article.cost*@single_article.article.discount/100))
-        @shopping_cart.save
-      end
+
       @carts_article.destroy!
     end
 
