@@ -25,6 +25,24 @@ class HomeController < ApplicationController
 
   end
 
+  def general
+    if user_signed_in?
+      @cart = ShoppingCart.where(user_id: current_user.id)
+
+      if @cart.empty?
+        ShoppingCart.create(user_id: current_user.id)
+      end
+    end
+
+  end
+
+  def download_pdf
+    send_file(
+        "#{Rails.root}/public/assets/Obrazac-za-jednostrani-raskid-ugovora_1.pdf",
+        filename: "Obrazac za jednostrani raskid ugovora.pdf",
+        type: "application/pdf"
+    )
+  end
 
 
 end

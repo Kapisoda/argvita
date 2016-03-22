@@ -340,24 +340,14 @@
         <h3>Informacije</h3>
         <ul>
           <li>
-            <a href="#">
-              <p>Akcije</p>
-            </a>
+            <%= link_to general_path do %>
+              <p>Opći uvjeti</p>
+            <% end %>
           </li>
           <li>
-            <a href="#">
-              <p>Novi Proizvodi</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <p>Naše Lokacije</p>
-            </a>
-          </li>
-          <li>
-            <a href="contact.html">
-              <p>Kontaktirajte Nas</p>
-            </a>
+            <%= link_to home_privacy_path do %>
+              <p>Izjava o privatnosti</p>
+            <% end %>
           </li>
         </ul>
       </div>

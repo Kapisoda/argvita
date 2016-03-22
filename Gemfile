@@ -40,6 +40,8 @@ gem 'gibbon'
 gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 gem 'chosen-rails'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 #jesen
 gem 'filterrific'
 

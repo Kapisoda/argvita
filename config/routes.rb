@@ -117,6 +117,16 @@ Rails.application.routes.draw do
 
   get 'auctions/complement_show' => "auctions#complement_show", :as => 'complement_show'
 
+  get 'home/general' => "home#general", :as => 'general'
+
+  get 'home/download_pdf' => "home#download_pdf", :as => 'download_pdf'
+
+  get 'home/privacy'
+
+  resources :home do
+    get :general, on: :collection
+    get :download_pdf, on: :collection
+  end
   resources :purchases
   resources :auctions do
     put :new_bid, on: :collection

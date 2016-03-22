@@ -48,6 +48,21 @@
                 </div>
               </section>
 
+              <section class="sky-form">
+                <h4>Sortiraj</h4>
+                <div class="row1 scroll-pane">
+
+                  <div class="col col-4">
+                    <%= f.select(
+                            :sorted_by,
+                            @filterrific.select_options[:sorted_by],
+                            { include_blank: false }, class: 'form-control'
+                        )%>
+
+                  </div>
+                </div>
+              </section>
+
 
               <section class="sky-form">
                 <h4>Kategorije</h4>

@@ -63,6 +63,7 @@
             <div class="product-bottom" style="margin: 0; padding: 0;">
               <div class="productboxkat"><%= @article.material.title %></div>
               <div class="row naslov-site">
+                <div class="productboxkat"><strong><div data-countdown="<%= @article.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></strong></div>
                 <div class="productbox"><%= @article.title %></div>
                 <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
               </div>
@@ -208,3 +209,11 @@
 
 <!--end-single-->
 
+<script>
+  $('[data-countdown]').each(function () {
+    var $this = $(this), finalDate = $(this).data('countdown');
+    $this.countdown(finalDate, function (event) {
+      $this.html(event.strftime('%D dana %H:%M:%S'));
+    });
+  });
+</script>

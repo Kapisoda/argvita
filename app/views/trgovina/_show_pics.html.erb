@@ -1,8 +1,9 @@
-    <div id="filterrific_results">
+<%= paginate articles %>
+<div id="filterrific_results">
 
       <% articles.each do |art| %>
 
-          <div class="product-one col-md-4 product-left ">
+          <div class="product-one col-md-4 product-left " style="">
             <div class="product-main simpleCart_shelfItem">
               <!--TODO: upisati naziv slike-->
               <%=link_to  trgovina_show_path(art.id)  do %> <% if !art.picture.nil? %> <%= image_tag(art.picture.image.url(:index), class: "img-responsive zoom-img") %><% else %> <%= image_tag('placeholder_index.png', class: "img-responsive zoom-img") %> <% end %> <% end %>
@@ -28,8 +29,8 @@
           </div>
       <% end %>
 
-      <div class="row">
-        <%= paginate articles %>
-      </div>
+    <div class="row">
+      <%= paginate articles %>
+    </div>
     </div>
 

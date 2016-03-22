@@ -83,12 +83,6 @@ class Article < ActiveRecord::Base
       when /^created_at_/
 
         order("articles.created_at #{ direction }")
-      when /^updated_at_/
-
-        order("articles.updated_at #{ direction }")
-      when /^title_/
-
-        order("LOWER(articles.title) #{ direction }")
       else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -193,9 +187,8 @@ class Article < ActiveRecord::Base
     [
         ['Cijeni (od najmanje)', 'cost_asc'],
         ['Cijeni (od najvise)', 'cost_desc'],
-        ['Nazivu (a-z)', 'title_asc'],
-        ['Novi proizvodi prvi', 'created_at_desc'],
-        ['Stari proizvodi prvi', 'created_at_asc']
+        ['Proizvodima(novi prvi)', 'created_at_desc'],
+        ['Proizvodima(stari prvi)', 'created_at_asc']
 
     ]
   end
