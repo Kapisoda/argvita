@@ -21,4 +21,6 @@
 //= require modal
 //= require chosen-jquery
 //= require select_category
+//= require wice_grid
+//= require bootstrap-datepicker
 //= require_tree .

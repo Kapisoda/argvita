@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :set_user, :set_cart
   def index
     @category = Category.all
     if current_user == nil

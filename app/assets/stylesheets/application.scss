@@ -26,6 +26,7 @@
  *= require lightslider
  *= require chosen
  *= require chosen_edit
+ *= require bootstrap-datepicker
  */
 
 .select-cat {
@@ -34,3 +35,6 @@
   float: right;
 }
 
+@import "wice_grid";
+@import "font-awesome-sprockets";
+@import "font-awesome";

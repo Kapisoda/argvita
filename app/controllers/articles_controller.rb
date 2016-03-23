@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-
+  before_filter :set_user, :set_cart
 
 
   def index

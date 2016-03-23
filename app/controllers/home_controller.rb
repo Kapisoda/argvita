@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_filter :set_user, :set_cart
+
   def index
     if user_signed_in?
        @cart = ShoppingCart.where(user_id: current_user.id)

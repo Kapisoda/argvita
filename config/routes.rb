@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'accounts/my_account'
+
+  get 'accounts/purchases'
+
   get 'purchases/create'
 
   get 'auctions/index'

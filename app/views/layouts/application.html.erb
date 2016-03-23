@@ -5,7 +5,7 @@
 
 
 
-  <title>Argvita</title>
+  <title>Argentum Vita</title>
   <%= include_gon %>
   <%= stylesheet_link_tag    'application','https://fonts.googleapis.com/css?family=Exo+2:400,300,600|Bree+Serif|Nunito:700&subset=latin,latin-ext', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'modal','data-turbolinks-track' => true %>
@@ -107,8 +107,6 @@
                           <span class="quantity">stavki: <%= i.amount %></span>
                           <%= link_to 'remove', destroy_single_shopping_carts_path(i.single_article.id), :method => :put, class: "quantity" %>
                         </li>
-
-
 
                   <% end %>
                 <% end %>
@@ -355,19 +353,18 @@
         <h3>Moj Račun</h3>
         <ul>
           <li>
-            <a href="account.html">
-              <p>Moj Račun</p>
-            </a>
+            <% if @user != nil %>
+              <%= link_to accounts_my_account_path do %>
+                <p>Moj Račun</p>
+              <% end %>
+            <% end %>
           </li>
           <li>
-            <a href="#">
-              <p>Povijest Kupnji</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <p>Osobni Podaci</p>
-            </a>
+            <% if @user != nil %>
+                <%= link_to accounts_purchases_path do %>
+                    <p>Povijest Kupnji</p>
+                <% end %>
+            <% end %>
           </li>
 
         </ul>

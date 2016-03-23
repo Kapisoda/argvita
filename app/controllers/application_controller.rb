@@ -3,20 +3,28 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
-
-
-
-
-  before_action :set_user
+  before_action :set_user, :set_cart
 
 
   def set_user
-    if $no_user_articles == nil
+    if current_user != nil
+      @user = User.find_by(id: current_user.id)
+    else $no_user_articles == nil
     $no_user_articles = Hash.new
     $no_user_articles_int = Hash.new
     $no_user_single_articles = Hash.new
     $items_cost = 0
+    end
+  end
+
+  def set_cart
+    if current_user == nil
+      @no_articles = Article.where(id: $no_user_articles.keys)
+      @sa = SingleArticle.where(id: $no_user_single_articles.keys)
+
+    else
+      @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)
+      @carts_article = CartsArticle.find_by(shopping_cart_id: @shopping_cart.id )
 
     end
   end

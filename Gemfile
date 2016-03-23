@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-
+gem 'bootstrap-datepicker-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -42,6 +43,9 @@ gem 'activemerchant'
 gem 'chosen-rails'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
+
+gem "wice_grid", '3.6.0.pre4'
+gem 'font-awesome-sass',  '~> 4.3'
 #jesen
 gem 'filterrific'
 
@@ -60,8 +64,6 @@ gem 'meta-tags', '~> 2.1'
 gem 'paperclip', '~> 4.3'
 
 gem 'aws-sdk', '< 2.0'
-
-gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

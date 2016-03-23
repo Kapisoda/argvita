@@ -1,5 +1,5 @@
 class AuctionsController < ApplicationController
-
+  before_filter :set_user, :set_cart
 
   def index
     if current_user != nil

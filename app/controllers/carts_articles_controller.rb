@@ -1,6 +1,6 @@
 class CartsArticlesController < ApplicationController
   #before_action :authenticate_user!
-
+  before_filter :set_user, :set_cart
 
   def index
   end
