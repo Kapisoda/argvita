@@ -58,8 +58,10 @@
             <div class="product-bottom">
               <div class="productboxkat"><%= @article.subcategory.title %></div>
               <div class="row naslov-site">
-                <div class="productboxkat"><strong><div data-countdown="<%= @article.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></strong></div>
-                <div class="productbox"><%= @article.title %></div>
+                <% if @article.on_discount %>
+                  <div class="productboxkat"><strong><div data-countdown="<%= @article.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></strong></div>
+                <% end %>
+                    <div class="productbox"><%= @article.title %></div>
                 <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
               </div>
               <div class="row">
