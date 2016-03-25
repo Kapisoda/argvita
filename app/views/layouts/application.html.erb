@@ -26,19 +26,34 @@
 </head>
 
 <body>
-<% if params[:controller] == 'home' && params[:action] == 'index' || params[:controller] == 'trgovina' && params[:action] == 'index' || params[:controller] == 'repromaterijal' && params[:action] == 'index' || params[:controller] == 'auctions' && params[:action] == 'index' %>
+<% if params[:controller] == 'home' && params[:action] == 'index' %>
   <div id="fakeLoader"></div>
+
+    <script type="text/javascript">
+      $("#fakeLoader").fakeLoader({
+        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+        zIndex:"99999",//Default zIndex
+        spinner:"spinner3",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
+        bgColor:"#1abc9c", //Hex, RGB or RGBA colors
+        //imagePath:"preloader.png" //If you want can you insert your custom image
+      });
+    </script>
+
+<% elsif  params[:controller] == 'trgovina' && params[:action] == 'index' || params[:controller] == 'repromaterijal' && params[:action] == 'index' || params[:controller] == 'auctions' && params[:action] == 'index' %>
+  <div id="fakeLoader"></div>
+
+    <script type="text/javascript">
+      $("#fakeLoader").fakeLoader({
+        timeToHide:500, //Time in milliseconds for fakeLoader disappear
+        zIndex:"99999",//Default zIndex
+        spinner:"spinner3",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
+        bgColor:"#1abc9c", //Hex, RGB or RGBA colors
+        //imagePath:"preloader.png" //If you want can you insert your custom image
+      });
+    </script>
 <% end %>
 
-<script type="text/javascript">
-  $("#fakeLoader").fakeLoader({
-    //timeToHide:1000, //Time in milliseconds for fakeLoader disappear
-    zIndex:"99999",//Default zIndex
-    spinner:"spinner3",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
-    bgColor:"#1abc9c", //Hex, RGB or RGBA colors
-    //imagePath:"preloader.png" //If you want can you insert your custom image
-  });
-</script>
+
 
 <!--top-header-->
 <div class="top-header row">
