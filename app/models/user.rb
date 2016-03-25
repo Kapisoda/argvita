@@ -5,9 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  after_create :subscribe_user_to_mailing_list
+  after_save :subscribe_user_to_mailing_list
 
+  after_create { |user|
+    shopping = ShoppingCart.new
 
+    shopping.user_id = user.id
+    shopping.current_cost = 0
+    shopping.save
+  }
 
   validates :name, :address, :state, :postcode, :phone, presence: true
 
