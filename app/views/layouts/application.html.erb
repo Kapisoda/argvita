@@ -3,8 +3,6 @@
 <head>
 
 
-
-
   <title>Argentum Vita</title>
   <%= include_gon %>
   <%= stylesheet_link_tag    'application','https://fonts.googleapis.com/css?family=Exo+2:400,300,600|Bree+Serif|Nunito:700&subset=latin,latin-ext', media: 'all', 'data-turbolinks-track' => true %>
@@ -28,9 +26,17 @@
 </head>
 
 <body>
+<div id="fakeLoader"></div>
 
-
-
+<script type="text/javascript">
+  $("#fakeLoader").fakeLoader({
+    timeToHide:1000, //Time in milliseconds for fakeLoader disappear
+    zIndex:"99999",//Default zIndex
+    spinner:"spinner3",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
+    bgColor:"#1abc9c", //Hex, RGB or RGBA colors
+    //imagePath:"preloader.png" //If you want can you insert your custom image
+  });
+</script>
 
 <!--top-header-->
 <div class="top-header row">
@@ -414,6 +420,7 @@
 <!--Login Form dialog-->
 
 </body>
+
 
 
 <!--Notice box on adding item to cart-->
