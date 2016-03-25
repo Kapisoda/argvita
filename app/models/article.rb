@@ -143,9 +143,16 @@ class Article < ActiveRecord::Base
 
   scope :min_cost, lambda { |ref_int|
     min, max = ref_int.to_s.split(';')
+
+    mmin = min.delete('"[\/]')
+    mmax = max.delete('"[\/]')
     puts "minimum je #{min.delete('"[\/]')}"
     puts "maximum je #{max.delete('"[\/]')}"
-    where("articles.cost >= ? AND articles.cost <= ?",  min.delete('"[\/]'), max.delete('"[\/]'))
+
+    if mmin != mmax
+      where("articles.cost >= ? AND articles.cost <= ?",  mmin, mmax)
+    end
+
   }
 
 ######################################################

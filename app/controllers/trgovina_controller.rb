@@ -126,7 +126,7 @@ class TrgovinaController < ApplicationController
 
     puts "Najveca cijena je #{gon.max}"
 
-    gon.min = Article.where(raw: false, for_sale: true ).order(:cost).pluck(:cost).first.to_f.ceil
+    gon.min = Article.where(raw: false, for_sale: true ).order(:cost).pluck(:cost).first.to_i
 
     puts "Najmanja cijena je #{gon.min}"
 

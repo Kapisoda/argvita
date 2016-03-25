@@ -15,6 +15,12 @@ default: &default
   password: WVg7qKu7w7
   port: 3306
 
+  #host: 108.167.137.108
+  #database: mandrecr_argentumvita
+  #username: mandrecr_hrvoje
+  #password: argentum1234
+  #port: 3306
+
 development:
   <<: *default
   adapter: mysql2

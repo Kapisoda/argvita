@@ -24,7 +24,7 @@
   g.column name: "Cijena(pojedinačno)", attribute: 'cost' do |t|
     number_to_currency(t.cost, :unit => 'Kn', :format => "%n %u")
   end
-  g.column name: "Cijena(ukupno)", attribute: 'cost' do |t|
+  g.column name: "Cijena(ukupno)", attribute: 'cost', filter: false do |t|
     number_to_currency(t.cost*t.amount, :unit => 'Kn', :format => "%n %u")
   end
 end-%>
