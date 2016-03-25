@@ -63,6 +63,7 @@ GEM
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
     celluloid (0.17.2)
       celluloid-essentials
@@ -307,6 +308,7 @@ DEPENDENCIES
   better_errors
   bootstrap-datepicker-rails
   bootstrap-kaminari-views
+  breadcrumbs_on_rails
   chosen-rails
   coffee-rails (~> 4.1.0)
   country_select

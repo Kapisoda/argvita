@@ -1,6 +1,9 @@
 class RepromaterijalController < ApplicationController
   before_filter :set_user, :set_cart
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Repromaterijal", :repromaterijal_index_path
+
   def categories
     if current_user == nil
     @no_articles = Article.where(id: $no_user_articles.keys)
@@ -92,7 +95,7 @@ class RepromaterijalController < ApplicationController
   end
 
   def index
-
+    add_breadcrumb "Repromaterijal", :repromaterijal_index_path
 
     @ssubcategories = Ssubcategory.all
     @subcategories = Subcategory.all

@@ -1,6 +1,9 @@
 class TrgovinaController < ApplicationController
   before_filter :set_user, :set_cart
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Gotov nakit", :trgovina_index_path
+
   def categories
     if current_user == nil
       @no_articles = Article.where(id: $no_user_articles.keys)
@@ -97,6 +100,8 @@ class TrgovinaController < ApplicationController
 
 
   def index
+    add_breadcrumb "Gotov nakit", :trgovina_index_path
+
     @categories = Category.all
     @materials = Material.all
 
@@ -136,7 +141,8 @@ class TrgovinaController < ApplicationController
                                                                                                                                                          with_category_id: Category.options_for_select,
                                                                                                                                                          with_material_id: Material.options_for_select,
                                                                                                                                                          with_color_id: Color.options_for_select,
-                                                                                                                                                         with_type_id: Type.options_for_select}) or return
+                                                                                                                                                         with_type_id: Type.options_for_select},
+                                                                                                                                                          persistence_id: true,) or return
 
 
     @articles = @filterrific.find.page(params[:page])
@@ -159,9 +165,12 @@ class TrgovinaController < ApplicationController
 
 
   def show
+
+
     @article = Article.find_by(id: params[:format], for_sale: true)
 
     if @article != nil
+
       rel_art_ids = []
       @rel_arts = []
 

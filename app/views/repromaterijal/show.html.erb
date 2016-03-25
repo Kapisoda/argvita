@@ -3,9 +3,9 @@
   <div class="container">
     <div class="breadcrumbs-main">
       <ol class="breadcrumb">
-        <li><a href="index.html">Početna</a></li>
+        <%= render_breadcrumbs :separator => '/' %>
         <!--TODO: staviti naziv artikla koji je na stranici-->
-        <li class="active"><%= @article.title %></li>
+        <li class="active">/<%= @article.title %></li>
       </ol>
     </div>
   </div>

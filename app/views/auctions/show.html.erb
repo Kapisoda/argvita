@@ -1,3 +1,15 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="breadcrumbs-main">
+      <ol class="breadcrumb">
+        <%= render_breadcrumbs :separator => '/' %>
+        <!--TODO: staviti naziv artikla koji je na stranici-->
+        <li class="active">/<%= @auction.article.title %></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
 <div class="single contact">
 
   <div class="container">

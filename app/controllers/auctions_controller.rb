@@ -1,6 +1,10 @@
 class AuctionsController < ApplicationController
   before_filter :set_user, :set_cart
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Aukcije", :auctions_index_path
+
+
   def index
     if current_user != nil
       @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)

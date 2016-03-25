@@ -47,6 +47,7 @@ gem 'bootstrap-kaminari-views'
 gem "wice_grid", '3.6.0.pre4'
 gem 'font-awesome-sass',  '~> 4.3'
 gem 'country_select'
+gem "breadcrumbs_on_rails"
 #jesen
 gem 'filterrific'
 
