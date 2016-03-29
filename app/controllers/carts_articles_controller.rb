@@ -70,11 +70,6 @@ class CartsArticlesController < ApplicationController
         @carts_article.amount += amount
         @carts_article.save
 
-        @shopping_cart.current_cost += @carts_article.cost
-        @shopping_cart.save
-
-        @ind = true
-
       else
         flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
         return redirect_to :back
@@ -83,7 +78,12 @@ class CartsArticlesController < ApplicationController
 
     end
 
-    if @ind == false && @article.on_discount.nil? || @ind == false &&  @article.on_discount == false || @ind == false &&  @article.discount != 0
+    puts "Artiklu je popust: #{@article.on_discount}"
+
+    if @article.on_discount.nil? || @article.on_discount == false || @article.discount == 0
+
+      puts "NEMA POPUSTA! ! !"
+
       if current_user == nil
 
         $items_cost += @article.cost
@@ -101,7 +101,7 @@ class CartsArticlesController < ApplicationController
       end
 
 
-    elsif @ind == false
+    elsif
       if current_user == nil
 
         $items_cost += (@article.cost- (@article.cost*@article.discount/100))
@@ -315,10 +315,6 @@ class CartsArticlesController < ApplicationController
           @carts_article.amount += amount
           @carts_article.save
 
-          @shopping_cart.current_cost += @carts_article.cost
-          @shopping_cart.save
-
-          @ind = true
         else
 
         flash[:error] = "Nema dovoljne kolicine artikla u ducanu"
@@ -350,7 +346,7 @@ class CartsArticlesController < ApplicationController
 
     puts "INDIKATOR JE #{@ind}"
 
-    if @ind == false && @single_article.article.on_discount.nil? || @ind == false && @single_article.article.on_discount == false || @ind == false && @single_article.article.discount != 0
+    if @single_article.article.on_discount.nil? || @single_article.article.on_discount == false || @single_article.article.discount == 0
 
       puts "Ušao sam u normalno postavljanje cijene!"
 
@@ -383,10 +379,6 @@ class CartsArticlesController < ApplicationController
       @carts_article.save
 
     end
-
-
-
-
 
     redirect_to :back
 

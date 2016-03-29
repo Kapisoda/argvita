@@ -720,12 +720,13 @@ a.mask {
     left: 15px;
 }
 .srch span {
-    background: #1abc9c;
+    background: rgba(26, 188, 156, 0.7);
     color: #fff;
     font-size: 15px;
     font-weight: 400;
     padding: 10px 25px;
 }
+
 /*--product-end--*/
 /*--information-starts--*/
 .infor-left h3 {
@@ -3342,7 +3343,7 @@ font-family: 'Exo 2', sans-serif;
 
     display: block;
     z-index:99;
-     background: #1abc9c;
+     background:  rgba(26, 188, 156, 0.7);
     color: #fff;
     margin-top: -20px;
     font-size: 15px;
@@ -3531,4 +3532,15 @@ font-family: 'Exo 2', sans-serif;
 
 .gumb_kupnja:hover {
     background-color: #1edab5;
+}
+
+.timer_popust {
+    display:block;
+    float: right;
+    position: absolute;
+    z-index: 999;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(26, 188, 156, 0.7);
+    margin-top: 5px;
 }

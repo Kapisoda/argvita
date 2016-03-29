@@ -67,8 +67,16 @@
                     <div class="productboxkat"><strong><div data-countdown="<%= @article.end_date.strftime("%Y/%m/%d %H:%M") %>"></div></strong></div>
                 <% end %>
                 <div class="productbox"><%= @article.title %></div>
-                <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
-              </div>
+
+                <% if @article.on_discount == true && @article.discount != 0 %>
+                    <div class="productboxprice" style="margin-left: 10px;"><span class=" item_price"><%= number_to_currency(@article.cost-(@article.cost*@article.discount/100), :unit => 'Kn', :format => "%n %u") %></span></div>
+                    <div class="productboxprice"><span class=" item_price" style="text-decoration: line-through;"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
+               <% else %>
+
+                    <div class="productboxprice"><span class=" item_price"><%= number_to_currency(@article.cost, :unit => 'Kn', :format => "%n %u") %></span></div>
+                <% end %>
+
+                    </div>
               <div class="row">
                 <div class="productboxkata"><strong>Kod Artikla:</strong> <%= @article.code %></div>
               </div>
