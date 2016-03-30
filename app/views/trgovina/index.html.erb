@@ -73,7 +73,7 @@
                   <div class="col col-4">
                     <% @materials.each do |a| %>
                         <label class="checkbox">
-                          <%= f.check_box(:with_material_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                          <%= f.check_box(:with_material_id, { multiple: true, class: 'filterrific-periodically-observed', autocomplete: "off"}, a.id, false ) %><i></i> <%= a.title %></label>
                     <% end %>
 
                   </div>
@@ -87,7 +87,7 @@
                   <div class="col col-4">
                     <% @categories.each do |a| %>
                         <label class="checkbox">
-                          <%= f.check_box(:with_category_id, {multiple: true, class: 'filterrific-periodically-observed'}, a.id, false ) %><i></i> <%= a.title %></label>
+                          <%= f.check_box(:with_category_id, {multiple: true, class: 'filterrific-periodically-observed', autocomplete: "off"}, a.id, false ) %><i></i> <%= a.title %></label>
                     <% end %>
 
                   </div>
@@ -153,3 +153,18 @@
 
 </script>
 
+<script>
+
+  <% js = escape_javascript(
+    render(partial: 'trgovina/show_pics', locals: { articles: @articles })
+  ) %>
+
+  $("#filterrific_results").html("<%= js %>");
+
+  $('[data-countdown]').each(function () {
+    var $this = $(this), finalDate = $(this).data('countdown');
+    $this.countdown(finalDate, function (event) {
+      $this.html(event.strftime('%D dana %H:%M:%S'));
+    });
+  });
+</script>

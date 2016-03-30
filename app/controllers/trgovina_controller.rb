@@ -1,6 +1,8 @@
 class TrgovinaController < ApplicationController
   before_filter :set_user, :set_cart
 
+  helper_method :index
+
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Gotov nakit", :trgovina_index_path
 
