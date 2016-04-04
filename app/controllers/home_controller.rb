@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     end
 
     @categories = Category.all
-    @articles = Article.all
+    @articles = Article.where(raw: false, for_sale: true).order('created_at DESC')
 
     if current_user != nil
     @shopping_cart = ShoppingCart.find_by(user_id: current_user.id)

@@ -17,7 +17,7 @@
                 <h3><%= art.title %></h3>
                 <!--NOTE: kratki opis od jednog reda-->
 
-                <% if art.short_description != nil %>
+                <% if art.short_description != nil  && art.short_description != "" %>
                   <h4><%= art.short_description  %></h4>
                 <% else %>
                   <h4>-</h4>

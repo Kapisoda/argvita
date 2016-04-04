@@ -671,6 +671,7 @@ img.zoom-img {
 	margin: 0 auto;
 }
 .product-left:hover img.zoom-img{
+
     -webkit-transform: scale(1.05);
     -webkit-transition-timing-function: ease-out;
     -webkit-transition-duration: 700ms;
